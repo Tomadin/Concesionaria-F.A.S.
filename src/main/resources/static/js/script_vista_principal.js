@@ -1,6 +1,6 @@
 function inicio(){ //funcion llamada por el body del html cada vez que se carga la página
 
-    for(let i=0; i<100; i++){
+    for(let i=0; i<10; i++){
         nueva_fila();
     }
 }
