@@ -11,7 +11,7 @@ public class ConcesionariaController {
     
     @GetMapping("/")
     public String concesionaria(){
-        return "VistaPrincipal.html";
+        return "vista-principal.html";
     }
     
     
