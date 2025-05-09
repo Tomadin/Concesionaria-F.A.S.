@@ -1,11 +1,15 @@
+body{
+    background-color: rgb(201, 201, 201); 
+    margin-left: auto; 
+    margin-right: auto; 
+    width: 100%;
+}
 
 .Barra_navegacion{
     z-index: 100;
-    overflow: visible;
     background-color: #333;
-    position: fixed; /* Set the navbar to fixed position */
-    top: 0; /* Position the navbar at the top of the page */
-    width: 100%; /* Full width */
+    position: fixed; 
+    width: 100%; 
     height: 100px;
     display: flex;
     justify-content: space-between;
@@ -15,15 +19,28 @@
     vertical-align: middle;
 }
 
+.Botones_navegacion{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 25px; 
+    margin-right: 25px;
+}
+
+.Botones_navegacion:hover{
+    text-decoration: underline;
+    color: #ffffff90
+}
+
 .Wrap {
-    z-index: 101;
+    z-index: 200;
     width: 100%;
     height: 100px;
     margin: 0 auto;
     margin-bottom: 20px;
 }
 
-.Sumario, .Ultimos_movimientos{
+.Sumario, .Vehiculos{
     margin: 40px;
     background: #fff;
     border: 1px solid #ddd;
@@ -34,32 +51,32 @@
     
 }
 
-.Carta_auto{
-    background-color: rgb(245, 245, 245);
-    width: 10rem;
-    font-size: 0.65rem;
-    
-}
-
 table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 10px;
 }
 
-th, td {
+th, td{
     padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #eee;
+    text-align: center;
+    border-bottom: 1px solid #c5c5c5;
+    
 }
 
-th{
-    background-color: #f2f2f2;
+th {
+    background-color: #dcdcdc;
 }
 
-
-.Carta_auto:hover{
+.Fila_stock:hover{
     cursor: pointer;
-    background-color: rgb(227, 227, 227);
-    border: 0.08rem rgb(174, 174, 174) solid;
+    background-color: #dcdcdc;
+}
+
+.Imagenes_auto_filas{
+    width: 140px;
+    height: 80px;
+    object-fit: cover;
+    overflow-clip-margin: unset;
+    border-radius: 5px;
 }
