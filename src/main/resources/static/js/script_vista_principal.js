@@ -38,7 +38,7 @@ function nueva_fila(){
     const celda_stock = document.createElement("td");
 
 
-    imagen.src = "/images/renault_header.jpg";
+    imagen.src = "images/renault_header.jpg";
     imagen.className = "Imagenes_auto_filas";
     celda_imagen.appendChild(imagen);
 
