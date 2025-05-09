@@ -1,0 +1,65 @@
+
+.Barra_navegacion{
+    z-index: 100;
+    overflow: visible;
+    background-color: #333;
+    position: fixed; /* Set the navbar to fixed position */
+    top: 0; /* Position the navbar at the top of the page */
+    width: 100%; /* Full width */
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 50px;
+    padding-right: 50px;
+    vertical-align: middle;
+}
+
+.Wrap {
+    z-index: 101;
+    width: 100%;
+    height: 100px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+.Sumario, .Ultimos_movimientos{
+    margin: 40px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 0;
+    margin-bottom: 20px;
+    
+}
+
+.Carta_auto{
+    background-color: rgb(245, 245, 245);
+    width: 10rem;
+    font-size: 0.65rem;
+    
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+th{
+    background-color: #f2f2f2;
+}
+
+
+.Carta_auto:hover{
+    cursor: pointer;
+    background-color: rgb(227, 227, 227);
+    border: 0.08rem rgb(174, 174, 174) solid;
+}
