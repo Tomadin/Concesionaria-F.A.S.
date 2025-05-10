@@ -15,6 +15,7 @@ function asignar_id_de_fila(){
     return (asignador_de_id_filas - 1); 
 }
 
+
 function nueva_fila(){
 
     const nuevo_id = asignar_id_de_fila()
@@ -28,34 +29,37 @@ function nueva_fila(){
     const celda_imagen = document.createElement("td");
     const imagen = document.createElement("img");
 
-    const celda_matricula_auto = document.createElement("td");
-    const celda_nro_serie = document.createElement("td");
+    const celda_id_vehiculo = document.createElement("td");
     const celda_modelo = document.createElement("td");
+    const celda_version = document.createElement("td");
     const celda_precio = document.createElement("td");
+    const celda_nro_serie = document.createElement("td");
     const celda_año = document.createElement("td")
     const celda_color = document.createElement("td");
     const celda_proveedor = document.createElement("td");
     const celda_stock = document.createElement("td");
 
 
-    imagen.src = "images/renault_header.jpg";
+    imagen.src = "images/renault-foto-placeholder.jpg";
     imagen.className = "Imagenes_auto_filas";
     celda_imagen.appendChild(imagen);
 
-    celda_matricula_auto.innerHTML = "auto_" + nuevo_id;
-    celda_nro_serie.innerHTML = "nro_serie_placeholder";
+    celda_id_vehiculo.innerHTML = "auto_" + nuevo_id;
     celda_modelo.innerHTML = "modelo_placeholder";
+    celda_version.innerHTML = "version_placeholder";
     celda_precio.innerHTML = "$0";
+    celda_nro_serie.innerHTML = "nro_serie_placeholder";
     celda_año.innerHTML = "2025";
     celda_color.innerHTML = "color_placeholder";
     celda_proveedor.innerHTML = "proveedor_placeholder";
     celda_stock.innerHTML = "Disponibilidad";
 
     fila.appendChild(celda_imagen);
-    fila.appendChild(celda_matricula_auto);
-    fila.appendChild(celda_nro_serie);
+    fila.appendChild(celda_id_vehiculo);
     fila.appendChild(celda_modelo);
+    fila.appendChild(celda_version);
     fila.appendChild(celda_precio);
+    fila.appendChild(celda_nro_serie);
     fila.appendChild(celda_año);
     fila.appendChild(celda_color);
     fila.appendChild(celda_proveedor);

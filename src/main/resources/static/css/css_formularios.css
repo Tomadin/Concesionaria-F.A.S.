@@ -35,7 +35,7 @@
   padding: 5px;
 }
 
-.Cargar_Vehiculo {
+.Cargar {
   width: 100%;
   padding: 12px;
   background-color: #007bff;
@@ -46,6 +46,6 @@
   cursor: pointer;
 }
 
-.Cargar_Vehiculo:hover {
+.Cargar:hover {
   background-color: #0056b3;
 }
