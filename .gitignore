@@ -1,3 +1,4 @@
+
 # Ignorar directorio de compilación de Maven
 /target/
 
@@ -6,3 +7,6 @@
 
 # Archivos de log
 *.log
+
+/target/
+
