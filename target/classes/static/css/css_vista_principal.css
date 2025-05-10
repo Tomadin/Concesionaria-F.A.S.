@@ -19,7 +19,7 @@ body{
     vertical-align: middle;
 }
 
-.Botones_navegacion, .Botones_navegacion_inactivos{
+.Botones_navegacion{
     display: flex;
     justify-content: space-between;
     align-items: center;
