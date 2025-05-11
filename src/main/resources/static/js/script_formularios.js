@@ -1,126 +1,116 @@
-document.getElementById("formulario_general").addEventListener('submit', function(e) {
+function inicio_pagina_formulario(){
+
+}
+
+
+document.getElementById("formulario_vehiculo").addEventListener('submit', function(e) {
     e.preventDefault();
 
-    /*
-    const vehiculo = {
-    matricula: document.getElementById('matricula').value,
-    marca: document.getElementById('marca').value,
-    modelo: document.getElementById('modelo').value,
-    puertas: document.getElementById('puertas').value,
-    color: document.getElementById('color').value,
-    precio: document.getElementById('precio').value,
-    anio: document.getElementById('anio').value,
-    proveedor: document.getElementById('proveedor').value,
-    imagen: document.getElementById('imagen').files[0]?.name || 'sin_imagen.jpg'
-    };
+    const objeto = {}; //objeto / diccionario que contiene los datos del formulario
+    let operacion_exitosa = true;
+    const mensajes_de_error = {};
 
-    console.log("Vehículo cargado:", vehiculo);
+    const f_modelo = document.getElementById("modelo");
+    if(f_modelo){
+        objeto["modelo"] = f_modelo.value;
+    }else{
+        operacion_exitosa = false;
+        mensajes_de_error["modelo"] = "Debe especificar el modelo";
+    }
 
-    // Aquí puedes hacer un POST a tu backend si estás usando Spring Boot
-    alert('Vehículo cargado correctamente');
-    document.getElementById('carForm').reset();
-    */
-   
+    const f_version = document.getElementById("version");
+    if(f_version){
+        objeto["version"] = f_version.value;
+    }else{
+        operacion_exitosa = false;
+        mensajes_de_error["version"] = "Debe especificar la versión";
+    }
+
+    const f_proveedor = document.getElementById("proveedor");
+    if(f_proveedor){
+        objeto["proveedor"] = f_proveedor.value;
+    }else{
+        operacion_exitosa = false;
+        mensajes_de_error["proveedor"] = "El proveedor es requerido";
+    }
+
+    const f_matricula = document.getElementById("matricula");
+    if(f_matricula){
+        objeto["matricula"] = f_matricula.value;
+    }
+
+    const f_precio = document.getElementById("precio");
+    if(f_precio){
+        objeto["precio"] = f_precio.value;
+    }else{
+        operacion_exitosa = false;
+        mensajes_de_error["precio"] = "El precio es requerido";
+    }
+
+    const f_color = document.getElementById("color");
+    if(f_color){
+        objeto["color"] = f_color.value;
+    }else{
+        operacion_exitosa = false;
+        mensajes_de_error["color"] = "El color es requerido";
+    }
+
+    const f_anio = document.getElementById("anio");
+    if(f_anio){
+        objeto["anio"] = f_anio.value;
+    }else{
+        operacion_exitosa = false;
+        mensajes_de_error["anio"] = "El año es requerido";
+    }
+
+    const f_serie = document.getElementById("serie");
+    if(f_serie){
+        objeto["serie"] = f_serie.value;
+    }else{
+        operacion_exitosa = false;
+        mensajes_de_error["serie"] = "El nro de serie es requerido";
+    }
+
+    const f_kilometraje = document.getElementById("kilometraje");
+    if(f_kilometraje){
+        objeto["kilometraje"] = f_kilometraje.value;
+    }else{
+        operacion_exitosa = false;
+        mensajes_de_error["kilometraje"] = "El kilometraje es requerido";
+    }
+
+    const f_estado = document.getElementById("estado");
+    if(f_estado){
+        objeto["estado"] = f_estado.value;
+    }else{
+        operacion_exitosa = false;
+        mensajes_de_error["estado"] = "Debe indicar el estado del vehículo";
+    }
+
+    var extensionesValidas = 
+            /(\.jpg|\.jpeg|\.png)$/i;
+
+    const f_imagen = document.getElementById("imagen");
+    if(f_imagen){
+        if(!extensionesValidas.exec(f_imagen.value)){
+            operacion_exitosa = false;
+            mensajes_de_error["imagen"] = "El formato de la imagen debe ser .jpg, .jpeg o .png";
+        }else{
+            objeto["imagen"] = f_imagen.value;
+        }
+    }else{
+        operacion_exitosa = false;
+        mensajes_de_error["imagen"] = "Debe subir una imágen";
+    }
+
+    if(operacion_exitosa){
+        // Aquí puedes hacer un POST a tu backend si estás usando Spring Boot
+        // Ahora el backend debería verificar los datos y guardarlos en la base de datos si están correctos
+        //Si hay algun error, se debe notificar 
+        alert('Vehículo cargado correctamente');
+    }else{
+        alert("Campos inválidos o incompletos");
+        return;
+    }
+
 });
-
-function cargar_formulario(){
-    crear_formulario_vehiculo();
-}
-
-function limpiar_formulario(){
-    document.getElementById("formulario_general").reset();
-    document.getElementById("formulario_general").innerHTML = null
-}
-
-function crear_elemento(id, label, input_o_select, tipo, placeholder, default_select, requerido){
-
-    const new_div = document.createElement("div");
-    new_div.className = "form-group";
-
-    if(label != null){
-        const new_label = document.createElement("label");
-        new_label.setAttribute("for", id);
-        new_label.innerHTML = label;
-        new_div.appendChild(new_label);
-    }
-
-
-    const new_input = document.createElement("input");
-    const new_select = document.createElement("select");
-
-    if(input_o_select == null){
-        console.log("Error, parámetro input_o_select no puede ser nulo");
-        return null;
-    }
-
-    switch(input_o_select){
-        case "input":
-
-            if(id != null){
-                new_input.setAttribute("id", id);    
-            }
-            if(tipo != null){
-                new_input.setAttribute("type", tipo);  
-            }
-            if(placeholder != null){
-                new_input.setAttribute("placeholder", placeholder);
-            }
-            if(requerido){
-                new_input.required = true;
-            }
-            new_div.appendChild(new_input);
-            break;
-
-        case "select":
-
-            if(id != null){
-                new_select.setAttribute("id", id);
-            }
-            const option = document.createElement("option");
-            if(default_select != null){
-                option.innerHTML = default_select;
-            }
-            if(requerido){
-                new_select.required = true
-            }
-            new_select.appendChild(option);
-            new_div.appendChild(new_select);
-            break;
-
-        default:
-            console.log("Error, parámetro input_o_select no es válido");
-            return null;
-    }
-
-    document.getElementById("formulario_general").appendChild(new_div);
-
-}
-
-
-function crear_formulario_vehiculo(){
-    document.getElementById("h2_formulario").innerHTML = "Cargar Vehículo";
-
-    crear_elemento("modelo", "Modelo", "select", null, null, "--Seleccione un modelo--", true);
-    crear_elemento("version", "Versión", "select", null, null, "--Seleccione una versión--", true);
-    crear_elemento("proveedor", "Proveedor", "select", null, null, "--Seleccione un proveedor--", true);
-    crear_elemento("matricula", "Matrícula", "input", "text", "Dejar vacío para vehículos sin matricula", null, null, false);
-    crear_elemento("precio", "Precio (ARS)", "input", "number", null, null, true);
-    document.getElementById("precio").setAttribute("min", "0");
-    crear_elemento("color", "Color", "input", "text", null, null, true);
-    crear_elemento("anio", "Año", "input", "number", null, null, true);
-    document.getElementById("anio").setAttribute("min", "1900");
-    document.getElementById("anio").setAttribute("max", "2099");
-    crear_elemento("serie", "Número de serie", "input", "text", null, null, true);
-    crear_elemento("kilometraje", "Kilometraje", "input", "number", null, null, true);
-    document.getElementById("kilometraje").setAttribute("min", "0");
-    document.getElementById("kilometraje").setAttribute("step", "0.01");
-    crear_elemento("estado", "Estado del vehículo", "select", null, null, "--Seleccione un estado--", true);
-    crear_elemento("imagen", "Imagen", "input", "file", null, null, true);
-
-    const boton_cargar = document.createElement("button");
-    boton_cargar.setAttribute("type", "submit");
-    boton_cargar.innerHTML = "Cargar vehículo";
-    boton_cargar.setAttribute("id", "boton_cargar");
-    boton_cargar.setAttribute("class", "Cargar");
-    document.getElementById("formulario_general").appendChild(boton_cargar);
-}

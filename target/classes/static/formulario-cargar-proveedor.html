@@ -2,7 +2,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Concesionaria Renault Mendoza</title>
+  <title>Formulario Proveedor</title>
   <link rel="shortcut icon" href="images/Renault-head-icon.png" type="image/x-icon">
   <link rel="icon" href="images/Renault-head-icon.png" type="image/x-icon">
 
@@ -11,8 +11,10 @@
 
   <link rel="stylesheet" href="css/css_vista_principal.css">
 
+  <link rel="stylesheet" href="css/css_formularios.css">
+
 </head>
-<body onload="inicio()">
+<body onload="inicio_pagina_formulario()">
 
   <div class="Wrap">
     
@@ -29,7 +31,7 @@
             <li class="nav-item Botones_navegacion">
               <a class="nav-link" href="#">Nueva venta</a>
             </li>
-            
+
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Cargar/Actualizar datos:
@@ -43,7 +45,6 @@
               </ul>
             </li>
 
-
           </ul>
           <form class="d-flex" role="search" style="margin-top: 16px;">
             <input class="form-control me-2" type="search" placeholder="Buscar por modelo" aria-label="Search"/>
@@ -54,34 +55,24 @@
     </nav>
   </div>
 
-  <div class="Sumario">
-    <h2>Resumen de la semana</h2>
-    <p><strong>0 unidades / $0</strong></p>
-  </div>
-  
-  <div class="Vehiculos">
-    <h2 style="text-align: center;">Vehículos</h2>
-    <table id="tabla_stock">
-      <tr>
-        <th style="border-radius: 10px 0 0 0;"></th>
-        <th>Id</th>
-        <th>Modelo</th>
-        <th>Version</th>
-        <th>Precio</th>
-        <th>Número de serie</th>
-        <th>Año de fabricación</th>
-        <th>Color</th>
-        <th>Proveedor</th>
-        <th style="border-radius: 0 10px 0 0;">Stock</th>
-      </tr>
-    </table>
-  </div>
 
+  <div class="form-container">
+    <h2 id="h2_formulario">Nuevo Proveedor</h2>
+    <form id="formulario_proveedor">
+
+
+        
+      <button type="submit" class="Cargar">Cargar Proveedor</button>
+
+    </form>
+
+  </div>
 
   <!--Bootstrap CDN via JsDeliver - JavaScript link-->  
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
   
   <script src="js/script_vista_principal.js"></script>
+  <script src="js/script_formularios.js"></script>
 </body>
 
 

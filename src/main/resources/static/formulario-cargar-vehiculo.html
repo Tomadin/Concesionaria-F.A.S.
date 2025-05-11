@@ -2,7 +2,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Formulario</title>
+  <title>Formulario Vehiculo</title>
   <link rel="shortcut icon" href="images/Renault-head-icon.png" type="image/x-icon">
   <link rel="icon" href="images/Renault-head-icon.png" type="image/x-icon">
 
@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="css/css_formularios.css">
 
 </head>
-<body onload="cargar_formulario()">
+<body onload="inicio_pagina_formulario()">
 
   <div class="Wrap">
     
@@ -37,8 +37,8 @@
                 Cargar/Actualizar datos:
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Modelo</a></li>
                 <li><a class="dropdown-item" href="#">Vehículo</a></li>
+                <li><a class="dropdown-item" href="#">Modelo</a></li>
                 <li><a class="dropdown-item" href="#">Cliente</a></li>
                 <li><a class="dropdown-item" href="#">Proveedor</a></li>
 
@@ -57,10 +57,65 @@
 
 
   <div class="form-container">
-    <h2 id="h2_formulario">Cargar</h2>
-    <form id="formulario_general">
+    <h2 id="h2_formulario">Nuevo Vehículo</h2>
+    <form id="formulario_vehiculo">
 
+        <div class="form-group">
+            <label for="modelo">Modelo</label>
+            <select id="modelo" required>
+                <option>--Seleccione un modelo--</option>
+            </select></div>
+        
+        <div class="form-group">
+            <label for="version">Versión</label>
+            <select id="version" required>
+                <option>--Seleccione una versión--</option>
+            </select></div>
+            
+        <div class="form-group">
+            <label for="proveedor">Proveedor</label>
+            <select id="proveedor" required>
+                <option>--Seleccione un proveedor--</option>
+            </select></div>
+            
+        <div class="form-group">
+            <label for="matricula">Matrícula</label>
+            <input id="matricula" type="text" placeholder="Dejar vacío para vehículos sin matricula"></div>
+        
+        <div class="form-group">
+            <label for="precio">Precio (ARS)</label>
+            <input id="precio" type="number" required min="0"></div>
+            
+        <div class="form-group">
+            <label for="color">Color</label>
+            <input id="color" type="text" required></div>
+            
+        <div class="form-group">
+            <label for="anio">Año</label>
+            <input id="anio" type="number" required min="1900" max="2099"></div>
+            
+        <div class="form-group">
+            <label for="serie">Número de serie</label>
+            <input id="serie" type="text" required>
+        
+        </div><div class="form-group">
+            <label for="kilometraje">Kilometraje</label>
+            <input id="kilometraje" type="number" required min="0" step="0.01"></div>
+            
+        <div class="form-group"><label for="estado">Estado del vehículo</label>
+            <select id="estado" required>
+                <option>--Seleccione un estado--</option>
+            </select></div>
+            
+        <div class="form-group">
+            <label for="imagen">Imagen</label>
+            <input id="imagen" type="file" required>
+        </div>
+
+        <button type="submit" class="Cargar">Cargar vehículo</button>
+    
     </form>
+
   </div>
 
   <!--Bootstrap CDN via JsDeliver - JavaScript link-->  
