@@ -3,6 +3,7 @@ body{
     margin-left: auto; 
     margin-right: auto; 
     width: 100%;
+    overflow-y: scroll;
 }
 
 .Barra_navegacion{
@@ -30,6 +31,16 @@ body{
 .Botones_navegacion:hover{
     text-decoration: underline;
     color: #ffffff90
+}
+
+.Icono_buscar {
+    color: #FFFFFF8C; 
+    border-color: #FFFFFF8C; 
+    background-image:url("../images/icon-search.png"); 
+    background-repeat: no-repeat; 
+    background-size: 30px; 
+    background-position: center; 
+    width: 50px;
 }
 
 .Wrap {
