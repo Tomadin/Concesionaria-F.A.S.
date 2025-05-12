@@ -34,7 +34,7 @@
 
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Cargar/Actualizar datos:
+                Cargar datos:
               </a>
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="#">Vehículo</a></li>
@@ -56,11 +56,87 @@
   </div>
 
 
-  <div class="form-container">
+  <div class="form-container" style="max-width: 1000px;">
     <h2 id="h2_formulario">Nueva Venta</h2>
-    <form id="formulario_venta">
+    <form id="formulario_venta"> <!--Formulario 5 - F5-->
 
-        
+        <div class="form-group">
+            <label for="F5_dni_cliente">DNI cliente</label>
+            <input id="F5_dni_cliente" type="number" min="0" required>
+        </div>
+
+        <div class="form-group">
+            <label for="F5_dni_empleado">DNI empleado</label>
+            <input id="F5_dni_empleado" type="number" min="0" required>
+        </div>
+
+        <div class="form-group">
+
+            <label for="F5_metodo">Método de pago</label>
+            <select name="F5_metodo" id="select_metodo_pago">
+                <option value="efectivo">Efectivo</option>
+                <option value="credito">Crédito</option>
+                <option value="debito">Débito</option>
+                <option value="transferencia">Transferencia</option>
+                <option value="financiacion">Financiación</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="F5_descuento">Descuento</label>
+            <input type="number" id="F5_descuento" placeholder="Sin descuento" min="0" max="100" step="0.01">
+        </div>
+
+        <div class="form-group">
+            <label for="F5_vehiculo_a_agregar">ID del vehículo</label>
+            <input type="text" id="F5_vehiculo_a_agregar">
+            <div style="display: flex; justify-content: space-between; text-align: center;">
+              <input type="button" value="Agregar" style="width: 120px; margin-top: 10px;">
+              <input type="number" value="1" min="1" max="999" style="width: 120px; margin-top: 10px;" placeholder="Cantidad" id="F5_cantidad_a_agregar">
+              <input type="button" value="Borrar último" style="width: 120px; margin-top: 10px;">
+              <input type="button" value="Borrar todos" style="width: 120px; margin-top: 10px;">
+            </div>
+
+            <br>
+            <p>Vehículos agregados:</p>
+            
+            <table id="tabla_vehiculos_agregados">
+              <tbody>
+                <tr>
+                  <th>ID</th>
+                  <th>Modelo</th>
+                  <th>Serie</th>
+                  <th>Cantidad</th>
+                  <th>Precio unitario</th>
+                  <th>Precio total</th>
+                  <th></th> <!--columna para los botones de borrar-->
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td><input type="button" value="Borrar" style="width: 80px;"></td>
+                </tr>
+              </tbody>
+
+            </table>
+
+            <br>
+            <p id="F5_precio_subtotal">Subtotal: $</p>
+            <p id="F5_precio_total">Total: $</p>
+            <br>
+
+
+        </div>
+
+        <div class="form-group">
+          <label for="F5_observaciones">Observaciones</label>
+          <textarea id="F5_observaciones" style="width: 100%; min-height: 200px; resize: none;"></textarea>
+
+        </div>
 
         <button type="submit" class="Cargar">Cargar Venta</button>
     
@@ -73,6 +149,7 @@
   
   <script src="js/script_vista_principal.js"></script>
   <script src="js/script_formularios.js"></script>
+  <script src="js/script_venta.js"></script>
 </body>
 
 

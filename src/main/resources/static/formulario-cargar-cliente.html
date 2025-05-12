@@ -34,7 +34,7 @@
 
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Cargar/Actualizar datos:
+                Cargar datos:
               </a>
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="#">Vehículo</a></li>
@@ -58,9 +58,53 @@
 
   <div class="form-container">
     <h2 id="h2_formulario">Nuevo Cliente</h2>
-    <form id="formulario_cliente">
+    <form id="formulario_cliente"> <!--Formulario 3 - F3-->
 
+        <div class="form-group">
+            <label for="F3_dni">DNI</label>
+            <input id="F3_dni" type="number" placeholder="Sin espacios ni guiones" required>
+        </div>
         
+        <div class="form-group">
+            <label for="F3_nombre">Nombre</label>
+            <input id="F3_nombre" type="text" required>
+        </div>
+
+        <div class="form-group">
+            <label for="F3_apellido">Apellido</label>
+            <input id="F3_apellido" type="text" required>
+        </div>
+
+        <div class="form-group">
+            <label for="F3_correo">Correo electrónico</label>
+            <input id="F3_correo" type="email" placeholder="Ej: name@example.com" required>
+        </div>
+
+        <div class="form-group">
+            <label for="F3_telefono">Teléfono</label>
+            <input id="F3_telefono" type="tel" placeholder="Ej: +54 9 261 000-0000" required>
+        </div>
+
+        <div class="form-group">
+            <label for="F3_ciudad">Ciudad</label>
+            <input id="F3_ciudad" type="text" required>
+        </div>
+
+        <div class="form-group">
+            <label for="F3_calle">Calle</label>
+            <input id="F3_calle" type="text" required>
+        </div>
+
+        <div class="form-group">
+            <label for="F3_nro_calle">Número de calle</label>
+            <input id="F3_nro_calle" type="number" required>
+        </div>
+
+        <div class="form-group">
+            <label for="F3_fecha">Fecha Nacimiento</label>
+            <input id="F3_fecha" type="date" required>
+        </div>
+
       <button type="submit" class="Cargar">Cargar Cliente</button>
 
     </form>
