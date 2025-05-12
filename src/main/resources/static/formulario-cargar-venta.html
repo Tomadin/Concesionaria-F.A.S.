@@ -1,15 +1,157 @@
-<!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulario Venta</title>
+  <link rel="shortcut icon" href="images/Renault-head-icon.png" type="image/x-icon">
+  <link rel="icon" href="images/Renault-head-icon.png" type="image/x-icon">
+
+  <!--Bootstrap CDN via JsDeliver - CSS link-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="css/css_vista_principal.css">
+
+  <link rel="stylesheet" href="css/css_formularios.css">
+
+</head>
+<body onload="inicio_pagina_formulario()">
+
+  <div class="Wrap">
+    
+    <nav class="navbar bg-dark navbar-expand-lg fixed-top Barra_navegacion" data-bs-theme="dark">
+      <div class="container-fluid">
+
+          <a class="navbar-brand" href="#" style="white-space: nowrap;">
+            <img src="images/renault-logo-with-text.svg" alt="Logo" style="width: 50px; filter:invert(); margin-right: 10px;">
+            Concesionaria Renault Mendoza
+          </a>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="margin-left: auto;">
+
+            <li class="nav-item Botones_navegacion">
+              <a class="nav-link" href="#">Nueva venta</a>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Cargar datos:
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Vehículo</a></li>
+                <li><a class="dropdown-item" href="#">Modelo</a></li>
+                <li><a class="dropdown-item" href="#">Cliente</a></li>
+                <li><a class="dropdown-item" href="#">Proveedor</a></li>
+
+              </ul>
+            </li>
+
+          </ul>
+          <form class="d-flex" role="search" style="margin-top: 16px;">
+            <input class="form-control me-2" type="search" placeholder="Buscar por modelo" aria-label="Search"/>
+            <button class="btn btn-outline-success" type="submit" style="color: #FFFFFF8C; border-color: #FFFFFF8C;">Buscar</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+
+  <div class="form-container" style="max-width: 1000px;">
+    <h2 id="h2_formulario">Nueva Venta</h2>
+    <form id="formulario_venta"> <!--Formulario 5 - F5-->
+
+        <div class="form-group">
+            <label for="F5_dni_cliente">DNI cliente</label>
+            <input id="F5_dni_cliente" type="number" min="0" required>
+        </div>
+
+        <div class="form-group">
+            <label for="F5_dni_empleado">DNI empleado</label>
+            <input id="F5_dni_empleado" type="number" min="0" required>
+        </div>
+
+        <div class="form-group">
+
+            <label for="F5_metodo">Método de pago</label>
+            <select name="F5_metodo" id="select_metodo_pago">
+                <option value="efectivo">Efectivo</option>
+                <option value="credito">Crédito</option>
+                <option value="debito">Débito</option>
+                <option value="transferencia">Transferencia</option>
+                <option value="financiacion">Financiación</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="F5_descuento">Descuento</label>
+            <input type="number" id="F5_descuento" placeholder="Sin descuento" min="0" max="100" step="0.01">
+        </div>
+
+        <div class="form-group">
+            <label for="F5_vehiculo_a_agregar">ID del vehículo</label>
+            <input type="text" id="F5_vehiculo_a_agregar">
+            <div style="display: flex; justify-content: space-between; text-align: center;">
+              <input type="button" value="Agregar" style="width: 120px; margin-top: 10px;">
+              <input type="number" value="1" min="1" max="999" style="width: 120px; margin-top: 10px;" placeholder="Cantidad" id="F5_cantidad_a_agregar">
+              <input type="button" value="Borrar último" style="width: 120px; margin-top: 10px;">
+              <input type="button" value="Borrar todos" style="width: 120px; margin-top: 10px;">
+            </div>
+
+            <br>
+            <p>Vehículos agregados:</p>
+            
+            <table id="tabla_vehiculos_agregados">
+              <tbody>
+                <tr>
+                  <th>ID</th>
+                  <th>Modelo</th>
+                  <th>Serie</th>
+                  <th>Cantidad</th>
+                  <th>Precio unitario</th>
+                  <th>Precio total</th>
+                  <th></th> <!--columna para los botones de borrar-->
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td><input type="button" value="Borrar" style="width: 80px;"></td>
+                </tr>
+              </tbody>
+
+            </table>
+
+            <br>
+            <p id="F5_precio_subtotal">Subtotal: $</p>
+            <p id="F5_precio_total">Total: $</p>
+            <br>
+
+
+        </div>
+
+        <div class="form-group">
+          <label for="F5_observaciones">Observaciones</label>
+          <textarea id="F5_observaciones" style="width: 100%; min-height: 200px; resize: none;"></textarea>
+
+        </div>
+
+        <button type="submit" class="Cargar">Cargar Venta</button>
+    
+    </form>
+
+  </div>
+
+  <!--Bootstrap CDN via JsDeliver - JavaScript link-->  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+  
+  <script src="js/script_vista_principal.js"></script>
+  <script src="js/script_formularios.js"></script>
+  <script src="js/script_venta.js"></script>
+</body>
+
+
 </html>
+

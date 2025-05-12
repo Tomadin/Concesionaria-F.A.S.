@@ -1,0 +1,3 @@
+function cargar_venta(){
+    
+}

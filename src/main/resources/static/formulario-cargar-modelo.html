@@ -2,7 +2,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Concesionaria Renault Mendoza</title>
+  <title>Formulario Modelo</title>
   <link rel="shortcut icon" href="images/Renault-head-icon.png" type="image/x-icon">
   <link rel="icon" href="images/Renault-head-icon.png" type="image/x-icon">
 
@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="css/css_formularios.css">
 
 </head>
-<body onload="inicio()">
+<body onload="inicio_pagina_formulario()">
 
   <div class="Wrap">
     
@@ -34,11 +34,11 @@
 
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Cargar/Actualizar datos:
+                Cargar datos:
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Modelo</a></li>
                 <li><a class="dropdown-item" href="#">Vehículo</a></li>
+                <li><a class="dropdown-item" href="#">Modelo</a></li>
                 <li><a class="dropdown-item" href="#">Cliente</a></li>
                 <li><a class="dropdown-item" href="#">Proveedor</a></li>
 
@@ -55,43 +55,39 @@
     </nav>
   </div>
 
+
   <div class="form-container">
-    <h2>Cargar Nuevo Modelo</h2>
-    <form id="modelForm">
+    <h2 id="h2_formulario">Nuevo Modelo</h2>
+    <form id="formulario_modelo"> <!--<Formulario 2 - F2-->
 
       <div class="form-group">
-        <label for="modelo">Modelo</label>
-        <input type="text" id="modelo" required>
-      </div>
-
+        <label for="F2_modelo">Nombre del modelo</label>
+        <input id="F2_modelo" type="text" required></div>
+      
       <div class="form-group">
-        <label for="version">Version</label>
-        <input type="text" id="version" required>
-      </div>
-
+        <label for="F2_version">Versión</label>
+        <input id="F2_version" type="text" required></div>
+        
       <div class="form-group">
-        <label for="carroceria">Carrocería</label>
-        <input type="text" id="carroceria" required>
-      </div>
-
+        <label for="F2_carroceria">Carrocería</label>
+        <input id="F2_carroceria" type="text" required></div>
+        
       <div class="form-group">
-        <label for="motor">Motor</label>
-        <input type="text" id="motor" required>
-      </div>
-
+        <label for="F2_motor">Motor</label>
+        <input id="F2_motor" type="text" required></div>
+        
       <div class="form-group">
-        <label for="transmision">Transmisión</label>
-        <input type="text" id="transmision" required>
-      </div>
-
+        <label for="F2_transmision">Transmisión</label>
+        <input id="F2_transmision" type="text" required=></div>
+        
       <div class="form-group">
-        <label for="puertas">Número de Puertas</label>
-        <input type="number" id="puertas" min="1" max="5" required>
-      </div>
-
-
+        <label for="F2_nro_puertas">Número de puertas</label>
+        <input id="F2_nro_puertas" type="number" required min="0"></div>
+        
       <button type="submit" class="Cargar">Cargar Modelo</button>
+
     </form>
+
   </div>
 
   <!--Bootstrap CDN via JsDeliver - JavaScript link-->  

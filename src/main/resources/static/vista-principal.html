@@ -32,11 +32,11 @@
             
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Cargar/Actualizar datos:
+                Cargar datos:
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Modelo</a></li>
                 <li><a class="dropdown-item" href="#">Vehículo</a></li>
+                <li><a class="dropdown-item" href="#">Modelo</a></li>
                 <li><a class="dropdown-item" href="#">Cliente</a></li>
                 <li><a class="dropdown-item" href="#">Proveedor</a></li>
 
@@ -55,23 +55,63 @@
   </div>
 
   <div class="Sumario">
-    <h2>Resumen de la semana</h2>
-    <p><strong>0 unidades / $0</strong></p>
+    <h2>Resumen del mes</h2>
+    <p><strong>0 unidades</strong></p>
+    <p><strong>$0</strong></p>
   </div>
   
   <div class="Vehiculos">
-    <h2 style="text-align: center;">Vehículos</h2>
+
+    <div style="justify-content: center; text-align: center;">
+
+      <h2>Vehículos</h2>
+      <br>
+
+      <div style="display: flex; justify-self: center; text-align: center;">
+
+        <div>
+          <label for="select_ordenar_por">Ordenar por:</label>
+          <select id="select_ordenar_por" class="form-select Select_orden" onchange="ordenar_tabla()" style="width: 200px; margin-right: 10px;">
+            <option value="id">ID</option>
+            <option value="modelo">Modelo</option>
+            <option value="version">Version</option>
+            <option value="color">Color</option>
+            <option value="precio">Precio</option>
+            <option value="serie">Número de serie</option>
+            <option value="anio">Año de fabricación</option>
+            <option value="proveedor">Proveedor</option>
+            <option value="estado">Estado</option>
+            <option value="stock">Stock</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="select_orden">Orden:</label>
+          <select id="select_orden" class="form-select Select_orden" onchange="ordenar_tabla()" style="width: 200px; margin-left: 10px;">
+            <option value="ascendente">Ascendente</option>
+            <option value="descendente">Descendente</option>
+          </select>
+        </div>
+      </div>
+
+
+
+
+    </div>
+
+
     <table id="tabla_stock">
-      <tr>
+      <tr id="fila_encabezado">
         <th style="border-radius: 10px 0 0 0;"></th>
         <th>Id</th>
         <th>Modelo</th>
         <th>Version</th>
-        <th>Precio</th>
+        <th>Color</th>
+        <th>Precio (ARS)</th>
         <th>Número de serie</th>
         <th>Año de fabricación</th>
-        <th>Color</th>
         <th>Proveedor</th>
+        <th>Estado</th>
         <th style="border-radius: 0 10px 0 0;">Stock</th>
       </tr>
     </table>
