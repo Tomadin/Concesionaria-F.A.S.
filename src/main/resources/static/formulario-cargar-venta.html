@@ -18,11 +18,11 @@
 
   <div class="Wrap">
     
-    <nav class="navbar bg-dark navbar-expand-lg fixed-top Barra_navegacion" data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg fixed-top Barra_navegacion" data-bs-theme="dark">
       <div class="container-fluid">
 
           <a class="navbar-brand" href="#" style="white-space: nowrap;">
-            <img src="images/renault-logo-with-text.svg" alt="Logo" style="width: 50px; filter:invert(); margin-right: 10px;">
+            <img src="images/renault-logo-with-text.svg" alt="Logo" style="width: 70px; filter:invert(); margin-right: 10px;">
             Concesionaria Renault Mendoza
           </a>
         <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
@@ -47,7 +47,7 @@
 
           </ul>
           <form class="d-flex" role="search" style="margin-top: 16px;" id="form_buscar" onsubmit="return false;">
-            <input class="form-control me-2" type="search" id="input_buscar" placeholder="Buscar en stock ..." aria-label="Search"/>  
+            <input class="form-control me-2 Buscador" type="search" id="input_buscar" placeholder="Buscar en stock ..." aria-label="Search"/>  
             <button class="btn btn-outline-success Icono_buscar" type="submit"></button>
           </form>
         </div>
@@ -91,16 +91,16 @@
             <label for="F5_vehiculo_a_agregar">ID del vehículo</label>
             <input type="text" id="F5_vehiculo_a_agregar">
             <div style="display: flex; justify-content: space-between; text-align: center;">
-              <input type="button" value="Agregar" style="width: 120px; margin-top: 10px;">
-              <input type="number" value="1" min="1" max="999" style="width: 120px; margin-top: 10px;" placeholder="Cantidad" id="F5_cantidad_a_agregar">
-              <input type="button" value="Borrar último" style="width: 120px; margin-top: 10px;">
-              <input type="button" value="Borrar todos" style="width: 120px; margin-top: 10px;">
+              <input type="button" value="Agregar" class="Botones_secundarios">
+              <input type="number" value="1" min="1" max="999" class="Botones_secundarios" placeholder="Cantidad" id="F5_cantidad_a_agregar">
+              <input type="button" value="Borrar último" class="Botones_secundarios">
+              <input type="button" value="Borrar todos" class="Botones_secundarios">
             </div>
 
             <br>
             <p>Vehículos agregados:</p>
             
-            <table id="tabla_vehiculos_agregados">
+            <table id="tabla_vehiculos_agregados" style="background-color: white;">
               <tbody>
                 <tr>
                   <th>ID</th>
@@ -118,7 +118,7 @@
                   <td></td>
                   <td></td>
                   <td></td>
-                  <td><input type="button" value="Borrar" style="width: 80px;"></td>
+                  <td><input type="button" value="Borrar" style="width: 80px;" class="Botones_secundarios"></td>
                 </tr>
               </tbody>
 
@@ -134,7 +134,7 @@
 
         <div class="form-group">
           <label for="F5_observaciones">Observaciones</label>
-          <textarea id="F5_observaciones" style="width: 100%; min-height: 200px; resize: none;"></textarea>
+          <textarea id="F5_observaciones"></textarea>
 
         </div>
 

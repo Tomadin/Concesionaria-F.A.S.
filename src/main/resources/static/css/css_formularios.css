@@ -2,9 +2,9 @@
   max-width: 800px;
   margin: 40px auto;
   padding: 30px;
-  background-color: #fff;
+  background-color: #dddddd;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.164);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 }
 
 .form-container h2 {
@@ -23,12 +23,17 @@
   font-weight: bold;
 }
 
-.form-group input, .form-group select {
+.form-group input:not(.Botones_secundarios), .form-group select:not(.Botones_secundarios) {
   width: 100%;
   padding: 10px;
   border: none;
   border-radius: 5px;
-  background-color: rgb(201, 201, 201);
+  background-color: #b0b0b0;
+}
+
+.form-group select:hover{
+  cursor: pointer;
+  background-color: #929292;
 }
 
 .form-group input[type="file"] {
@@ -48,4 +53,29 @@
 
 .Cargar:hover {
   background-color: #0056b3;
+}
+
+.Botones_secundarios{
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #a7a7a7;
+  color: rgb(0, 0, 0);
+  width: 120px;
+  margin-top: 10px;
+}
+
+.Botones_secundarios:hover{
+  background-color: #6d6d6d;
+  color: white;
+}
+
+textarea {
+  width: 100%; 
+  min-height: 200px; 
+  resize: none; 
+  background-color: #b0b0b0;
+  border-radius: 5px; 
+  border: none;
+  padding: 5px;
 }
