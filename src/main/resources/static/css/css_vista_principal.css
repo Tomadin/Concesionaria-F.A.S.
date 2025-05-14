@@ -1,14 +1,31 @@
 body{
-    background-color: rgb(201, 201, 201); 
+    font-family: 'Nouvel';
+    font-weight: bold;
+    background-color: #ebebeb;
+    background-color: rgb(34, 34, 34);
     margin-left: auto; 
     margin-right: auto; 
     width: 100%;
     overflow-y: scroll;
 }
 
+@font-face {
+    font-family:'Nouvel';
+    src:url("../fonts/nouvel-r-cufonfonts/NouvelRRegular.ttf") format('truetype');
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family:'Nouvel';
+    src:url("../fonts/nouvel-r-cufonfonts/NouvelRBold.ttf") format('truetype');
+    font-weight: bold;
+}
+
 .Barra_navegacion{
     z-index: 100;
-    background-color: #333;
+    /*background-color: #333;*/
+    background-color: #000000;
     position: fixed; 
     width: 100%; 
     height: 100px;
@@ -18,6 +35,7 @@ body{
     padding-left: 50px;
     padding-right: 50px;
     vertical-align: middle;
+    
 }
 
 .Botones_navegacion{
@@ -31,6 +49,14 @@ body{
 .Botones_navegacion:hover{
     text-decoration: underline;
     color: #ffffff90
+}
+
+.Buscador{
+    background: none;
+}
+
+.Buscador:focus, .Buscador:autofill {
+    background: none;
 }
 
 .Icono_buscar {
@@ -53,13 +79,13 @@ body{
 
 .Sumario, .Vehiculos{
     margin: 40px;
-    background: #fff;
+    background: #dddddd;
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 20px;
     margin-top: 0;
     margin-bottom: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.164);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
     
 }
 
@@ -68,7 +94,7 @@ body{
   padding: 10px;
   border: none;
   border-radius: 5px;
-  background-color: #e9e9e9;
+  background-color: #b2b2b2;
 }
 
 table {
@@ -86,7 +112,7 @@ th, td{
 
 
 th {
-    background-color: #dcdcdc;
+    background-color: #b2b2b2;
 }
 
 .Fila_stock:hover{
