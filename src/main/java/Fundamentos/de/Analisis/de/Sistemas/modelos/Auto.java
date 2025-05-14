@@ -1,10 +1,6 @@
 package Fundamentos.de.Analisis.de.Sistemas.modelos;
 
-
-
-
 import jakarta.persistence.*;
-
 
 
 @Entity
