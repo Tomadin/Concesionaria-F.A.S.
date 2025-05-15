@@ -51,7 +51,7 @@ document.getElementById('formulario_vehiculo').addEventListener('submit', functi
     console.log(document.getElementById('F1_imagen').value);
 
 
-    fetch('http://localhost:8080/api/vehiculos/crear', {
+    fetch('http://localhost:8080/api/autos/crear', {
         method: 'POST',
         body: formData, 
     })
