@@ -4,13 +4,13 @@ function inicio(){ //funcion llamada por el body del html cada vez que se carga 
     diccionario_atributos = {};
 
     //debug, filas de ejemplo
-    nueva_fila(1, "Logan", "Life 1.6", "Gris", 25000000, "A1234", 2019, "proveedor1", "Disponible", 5, null, null, null, null, null);
+    nueva_fila(1, "Logan", "Life 1.6", "Gris", 24800000, "A1234", 2019, "proveedor1", "Disponible", 5, null, null, null, null, null);
     nueva_fila(2, "Kangoo", "Zen 1.6", "Rojo", 30000000, "A1634", 2020, "proveedor2", "Vendido", 2, null, null, null, null, null);
     nueva_fila(3, "Sandero", "Life 1.6", "Azul", 22000000, "A2345", 2021, "proveedor3", "Disponible", 3, null, null, null, null, null);
     nueva_fila(4, "Kardian", "Evolution", "Blanco", 28000000, "A3456", 2022, "proveedor4", "Almacenado", 4, null, null, null, null, null);
     nueva_fila(5, "Clio", "Mio 1.2", "Negro", 11000000, "H4567", 1994, "proveedor2", "Disponible", 1, null, null, null, null, null, null, null);
     nueva_fila(6, "Arkana E-Tech Hybrid", "Espirit Alpine", "Gris", 43900000, "A6789", 2024, "proveedor3", "Vendido", 1, null, null, null, null, null);
-    nueva_fila(7, "Stepway", "Intents 1.6", "Naranja", 28000000, "HS7690", 2025, "proveedor4", "Almacenado", 1, null, null, null, null, null);
+    nueva_fila(7, "Stepway", "Intents 1.6", "Negro", 28740000, "HS7690", 2025, "proveedor4", "Almacenado", 1, null, "1.6 L 4 motor en línea", "Autoportante en acero", "Caja automática CVT", 4);
     nueva_fila(8, "Stepway", "Intents 1.6 CVT", "Blanco", 28000000, "HS7691", 2025, "proveedor4", "Almacenado", 1, null, null, null, null, null);
     nueva_fila(9, "Master", "Furgon L1H1", "Blanco", 54080000, "A6797", 2022, "proveedor5", "Disponible", 3, null, null, null, null, null);
     nueva_fila(10, "Alskan", "Confort 2.3 dCi 160 2WD", "Azul", 36360000, "HS4561", 2023, "proveedor2", "Disponible", 0, null, null, null, null, null);
@@ -21,7 +21,7 @@ var diccionario_atributos = {} //diccionario que contiene los atributos cada veh
 
 function nueva_fila(vehiculo_id, modelo, version, color, precio, serie, anio, proveedor, estado, stock, imagen_url, motor, carroceria, transmision, puertas){
 
-    const tabla = document.getElementById("tabla_stock");
+    const tabla = document.getElementById("tabla_stock")
 
     const fila = document.createElement("tr"); //filas con los datos: modelo, precio, stock
     fila.id = "vehiculo_" + vehiculo_id;
@@ -41,7 +41,7 @@ function nueva_fila(vehiculo_id, modelo, version, color, precio, serie, anio, pr
     const celda_estado = document.createElement("td");
     const celda_stock = document.createElement("td");
 
-    let imagen_valida = false; 
+    let imagen_valida = true; 
     //imagen_valida= checkImage(imagen_url); //IMPORTANTE - NO BORRAR - EN IMPLEMENTACIÓN (es para verificar que la imágen exista, sino se usa una de placeholder)
 
     if(imagen_url===null || imagen_url===undefined || !imagen_valida){
@@ -51,7 +51,6 @@ function nueva_fila(vehiculo_id, modelo, version, color, precio, serie, anio, pr
     }else{
         nueva_imagen.src = imagen_url;
     }
-    nueva_imagen.src = "images/imagen-placeholder-para-autos.jpg"
 
     nueva_imagen.className = "Imagenes_auto_filas";
     celda_imagen.appendChild(nueva_imagen);
@@ -297,15 +296,15 @@ function llenar_vista_completa(p_id){
   }
 
   if(diccionario_atributos[p_id][1]===undefined || diccionario_atributos[p_id][1]===null){
-    document.getElementById("v_c_modelo").innerHTML = "Modelo : -";
+    document.getElementById("v_c_modelo").innerHTML = "modelo_placeholder";
   } else {
-    document.getElementById("v_c_modelo").innerHTML = "Modelo : " + diccionario_atributos[p_id][1];
+    document.getElementById("v_c_modelo").innerHTML = diccionario_atributos[p_id][1];
   }
 
   if(diccionario_atributos[p_id][2]===undefined || diccionario_atributos[p_id][2]===null){
-    document.getElementById("v_c_version").innerHTML = "Version : -";
+    document.getElementById("v_c_version").innerHTML = "version_placeholder";
   } else {
-    document.getElementById("v_c_version").innerHTML = "Version : " + diccionario_atributos[p_id][2];
+    document.getElementById("v_c_version").innerHTML = diccionario_atributos[p_id][2];
   }
 
   if(diccionario_atributos[p_id][4]===undefined || diccionario_atributos[p_id][4]===null){
