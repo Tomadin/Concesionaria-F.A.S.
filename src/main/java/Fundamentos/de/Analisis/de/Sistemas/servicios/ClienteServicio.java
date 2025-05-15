@@ -14,21 +14,20 @@ public class ClienteServicio {
     @Autowired
     private ClienteRepository repo;
     
-    public void guardarCliente(Cliente cliente){
-       repo.save(cliente);
+    public Cliente guardarCliente(Cliente cliente){
+       return repo.save(cliente);
     }
     
-   
     
     public List<Cliente> obtenerTodos(){
         return repo.findAll();
     }
     
-    public Optional<Cliente> buscarPorId(int id){
+    public Optional<Cliente> buscarPorId(long id){
         return repo.findById(id); 
     }
     
-    public void eliminarCliente(int id){
+    public void eliminarCliente(long id){
         repo.deleteById(id);
     }
 
