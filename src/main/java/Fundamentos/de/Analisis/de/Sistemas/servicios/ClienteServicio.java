@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Fundamentos.de.Analisis.de.Sistemas.servicios;
 
 
@@ -17,11 +14,13 @@ public class ClienteServicio {
     @Autowired
     private ClienteRepository repo;
     
-    public Cliente guardar(Cliente clie){
-        return repo.save(clie);
+    public void guardarCliente(Cliente cliente){
+       repo.save(cliente);
     }
     
-    public List<Cliente> listarTodos(){
+   
+    
+    public List<Cliente> obtenerTodos(){
         return repo.findAll();
     }
     
@@ -32,4 +31,6 @@ public class ClienteServicio {
     public void eliminarCliente(int id){
         repo.deleteById(id);
     }
+
+   
 }
