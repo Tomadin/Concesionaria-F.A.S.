@@ -25,7 +25,7 @@
     <nav class="navbar navbar-expand-lg fixed-top Barra_navegacion" data-bs-theme="dark">
       <div class="container-fluid">
 
-          <a class="navbar-brand" href="#" style="white-space: nowrap;">
+          <a class="navbar-brand" href="http://localhost:8080/" style="white-space: nowrap;">
             <img src="images/renault-logo-with-text.svg" alt="Logo" style="width: 70px; filter:invert(); margin-right: 10px;">
             Concesionaria Renault Mendoza
           </a>
@@ -41,11 +41,10 @@
                 Cargar datos
               </a>
               <ul class="dropdown-menu Desplegable">
-                <li><a class="dropdown-item" href="#">Vehículo</a></li>
-                <li><a class="dropdown-item" href="#">Modelo</a></li>
-                <li><a class="dropdown-item" href="#">Cliente</a></li>
-                <li><a class="dropdown-item" href="#">Proveedor</a></li>
-
+                <li><a class="dropdown-item" href="http://localhost:8080/vehiculos">Vehículo</a></li>
+                <li><a class="dropdown-item" href="http://localhost:8080/modelos">Modelo</a></li>
+                <li><a class="dropdown-item" href="http://localhost:8080/clientes">Cliente</a></li>
+                
               </ul>
             </li>
 
@@ -60,11 +59,6 @@
   </div>
 
   <main> <!--Contenido principal-->
-
-
-    <div class="form-container">
-      <h2 id="h2_formulario">Nuevo Modelo</h2>
-      <form id="formulario_modelo"> <!--<Formulario 2 - F2-->
 
   <div class="form-container">
     <h2 id="h2_formulario">Nuevo Modelo</h2>
@@ -105,23 +99,8 @@
 
   </main>
 
-      <div class="form-group">
-        <label for="F2_motor">Motor</label>
-        <input id="F2_motor" type="text" required></div>
-        
-      <div class="form-group">
-        <label for="F2_transmision">Transmisión</label>
-        <input id="F2_transmision" type="text" ></div>
-        
-      <div class="form-group">
-        <label for="F2_nro_puertas">Número de puertas</label>
-        <input id="F2_nro_puertas" type="number" required min="0"></div>
-        
-      <button type="submit" class="Cargar">Cargar Modelo</button>
 
-    </form>
-
-  </div>
+ 
 
 
   <!--Bootstrap CDN via JsDeliver - JavaScript link-->  

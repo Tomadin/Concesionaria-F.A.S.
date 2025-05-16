@@ -13,27 +13,27 @@ public class Cliente {
     private int DNI;
     @Basic
     private String nombre;
-    private String Apellido;
-    private int Telefono;
+    private String apellido;
+    private String  telefono;
     private String calle;
-    private int NumeroCalle;
-    private String CorreoElectronico;
+    private String  numeroCalle;
+    private String correoElectronico;
     
     @Temporal(TemporalType.DATE)
-    private Date FechaNacimiento;
+    private Date fechaNacimiento;
     
     public Cliente() {
     }
 
-    public Cliente(int DNI, String nombre, String Apellido, int Telefono, String calle, int NumeroCalle, String CorreoElectronico, Date FechaNacimiento) {
+    public Cliente(int DNI, String nombre, String Apellido, String  Telefono, String calle, String  NumeroCalle, String CorreoElectronico, Date FechaNacimiento) {
         this.DNI = DNI;
         this.nombre = nombre;
-        this.Apellido = Apellido;
-        this.Telefono = Telefono;
+        this.apellido = Apellido;
+        this.telefono = Telefono;
         this.calle = calle;
-        this.NumeroCalle = NumeroCalle;
-        this.CorreoElectronico = CorreoElectronico;
-        this.FechaNacimiento = FechaNacimiento;
+        this.numeroCalle = NumeroCalle;
+        this.correoElectronico = CorreoElectronico;
+        this.fechaNacimiento = FechaNacimiento;
     }
 
     public int getDNI() {
@@ -53,19 +53,19 @@ public class Cliente {
     }
 
     public String getApellido() {
-        return Apellido;
+        return apellido;
     }
 
     public void setApellido(String Apellido) {
-        this.Apellido = Apellido;
+        this.apellido = Apellido;
     }
 
-    public int getTelefono() {
-        return Telefono;
+    public String  getTelefono() {
+        return telefono;
     }
 
-    public void setTelefono(int Telefono) {
-        this.Telefono = Telefono;
+    public void setTelefono(String  Telefono) {
+        this.telefono = Telefono;
     }
 
     public String getCalle() {
@@ -76,28 +76,28 @@ public class Cliente {
         this.calle = calle;
     }
 
-    public int getNumeroCalle() {
-        return NumeroCalle;
+    public String  getNumeroCalle() {
+        return numeroCalle;
     }
 
-    public void setNumeroCalle(int NumeroCalle) {
-        this.NumeroCalle = NumeroCalle;
+    public void setNumeroCalle(String  NumeroCalle) {
+        this.numeroCalle = NumeroCalle;
     }
 
     public String getCorreoElectronico() {
-        return CorreoElectronico;
+        return correoElectronico;
     }
 
     public void setCorreoElectronico(String CorreoElectronico) {
-        this.CorreoElectronico = CorreoElectronico;
+        this.correoElectronico = CorreoElectronico;
     }
 
     public Date getFechaNacimiento() {
-        return FechaNacimiento;
+        return fechaNacimiento;
     }
 
     public void setFechaNacimiento(Date FechaNacimiento) {
-        this.FechaNacimiento = FechaNacimiento;
+        this.fechaNacimiento = FechaNacimiento;
     }
     
     

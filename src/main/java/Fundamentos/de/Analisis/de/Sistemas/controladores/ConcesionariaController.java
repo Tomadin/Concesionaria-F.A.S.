@@ -13,13 +13,30 @@ public class ConcesionariaController {
     public String concesionaria(){
         return "vista-principal.html";
     }
-    @GetMapping("/a")
-    public String borrar(){
+    
+    @GetMapping("/vehiculos")
+    public String cargarNuevoVehiculo(){
         return "formulario-cargar-vehiculo.html";
     }
-    @GetMapping("/aa")
-    public String borrar2(){
+    
+   
+    @GetMapping("/modelos")
+    public String cargarNuevoModelo2(){
         return "formulario-cargar-modelo.html";
     }
     
+    @GetMapping("/proveedores")
+    public String cargarNuevoProveedor(){
+        return "formulario-cargar-proveedor.html";
+    }
+    
+    @GetMapping("/clientes")
+    public String cargarNuevoCliente(){
+        return "formulario-cargar-cliente.html";
+    }
+    
+    @GetMapping("/venta")
+    public String cargarNuevaVenta(){
+        return "formulario-cargar-venta.html";
+    }
 }

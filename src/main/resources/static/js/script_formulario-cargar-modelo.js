@@ -21,6 +21,7 @@ document.getElementById('formulario_modelo').addEventListener('submit', function
     console.log(document.getElementById('F2_nro_puertas').value);
 
 
+
     fetch('http://localhost:8080/api/modelos/crear', {
         method: 'POST',
         headers: {
