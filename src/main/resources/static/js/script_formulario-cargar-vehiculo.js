@@ -1,91 +1,125 @@
+document.addEventListener("DOMContentLoaded", function () {
+    const select_modelo = document.getElementById("F1_modelo");
+    const select_version = document.getElementById("F1_version");
 
-var imagen_valida = false;
+    let modelosData = [];
+    let imagen_valida = false;
 
-document.getElementById('formulario_vehiculo').addEventListener('submit', function (event) {
-    event.preventDefault(); // Evita el envío tradicional
+    // Cargo modelos y guardo data para usar luego
+    fetch("http://localhost:8080/api/modelos")
+        .then(response => response.json())
+        .then(data => {
+            modelosData = data;
 
-    if (!imagen_valida) {
-        alert("La imagen debe ser .jpg, .jpeg o .png");
-        return;
-    }
+            select_modelo.innerHTML = ""; // limpio
+            const op = document.createElement("option");
+            op.value = "";
+            op.textContent = "--Seleccione un modelo--";
+            select_modelo.appendChild(op);
 
-    const imagenInput = document.getElementById('F1_imagen');
-    const imagenFile = imagenInput.files[0];
+            data.forEach(modelo => {
+                const option = document.createElement("option");
+                option.value = modelo.id;
+                option.textContent = modelo.nombre;
+                select_modelo.appendChild(option);
+            });
 
-    let matricula_var; // esta variable no es obligatoria en el formulario
+            select_version.innerHTML = "<option value=''>--Seleccione una versión--</option>"; // Inicial
+        })
+        .catch(error => {
+            console.error("Error al cargar modelos:", error);
+            select_modelo.innerHTML = "<option>Error al cargar modelos</option>";
+        });
 
-    if (!document.getElementById('F1_matricula').value || document.getElementById('F1_matricula').value.trim() === "" || document.getElementById('F1_matricula').value === null) {
-        matricula_var = "-";
-    } else {
-        matricula_var = document.getElementById('F1_matricula').value;
-    }
+    // Evento para cambiar versiones cuando seleccionan modelo
+    select_modelo.addEventListener("change", function () {
+        const modeloIdSeleccionado = this.value;
+        select_version.innerHTML = ""; // limpio versiones
 
-    //USAMOS FORMDATA EN LUGAR DE JSON PARA PODER ENVIAR LA IMAGEN
-    const formData = new FormData();
-    formData.append('modelo', document.getElementById('F1_modelo').value);
-    formData.append('version', document.getElementById('F1_version').value);
-    formData.append('proveedor', document.getElementById('F1_proveedor').value);
-    formData.append('matricula', matricula_var);
-    formData.append('precio', parseFloat(document.getElementById('F1_precio').value));
-    formData.append('color', document.getElementById('F1_color').value);
-    formData.append('anio', parseInt(document.getElementById('F1_anio').value, 10));
-    formData.append('serie', document.getElementById('F1_serie').value);
-    formData.append('estado', document.getElementById('F1_estado').value);
+        if (!modeloIdSeleccionado) {
+            const opcionDefault = document.createElement("option");
+            opcionDefault.value = "";
+            opcionDefault.textContent = "--Seleccione una versión--";
+            select_version.appendChild(opcionDefault);
+            return;
+        }
 
-    if (imagenFile) {
-        formData.append('imagen', imagenFile);
-    }
-    else {
-        formData.append('imagen', null);
-    }
+        const modeloSeleccionado = modelosData.find(m => m.id == modeloIdSeleccionado);
 
+        if (modeloSeleccionado && modeloSeleccionado.version) {
+            const opcionVersion = document.createElement("option");
+            opcionVersion.value = modeloSeleccionado.version;
+            opcionVersion.textContent = modeloSeleccionado.version;
+            select_version.appendChild(opcionVersion);
+        } else {
+            const opcionDefault = document.createElement("option");
+            opcionDefault.value = "";
+            opcionDefault.textContent = "--Sin versión disponible--";
+            select_version.appendChild(opcionDefault);
+        }
+    });
 
-    console.log(document.getElementById('F1_modelo').value);
-    console.log(document.getElementById('F1_version').value);
-    console.log(document.getElementById('F1_proveedor').value);
-    console.log(matricula_var);
-    console.log(document.getElementById('F1_precio').value);
-    console.log(document.getElementById('F1_color').value);
-    console.log(document.getElementById('F1_anio').value);
-    console.log(document.getElementById('F1_serie').value);
-    console.log(document.getElementById('F1_estado').value);
-    console.log(document.getElementById('F1_imagen').value);
+    // Función para vista previa de imagen
+    window.preview_de_imagen = function () {
+        const extensionesValidas = /(\.jpg|\.jpeg|\.png)$/i;
+        const f_imagen = document.getElementById("F1_imagen");
+        const preview = document.getElementById("F1_imagen_preview");
 
+        if (!f_imagen || !extensionesValidas.exec(f_imagen.value)) {
+            alert("El formato de la imagen debe ser .jpg, .jpeg o .png");
+            preview.src = "images/imagen-placeholder-para-autos.jpg";
+            f_imagen.value = "";
+            imagen_valida = false;
+        } else {
+            preview.src = URL.createObjectURL(f_imagen.files[0]);
+            imagen_valida = true;
+        }
+    };
 
-    fetch('http://localhost:8080/api/autos/crear', {
-        method: 'POST',
-        body: formData, 
-    })
-    .then(response => {
-        if (!response.ok)
-            throw new Error('Error en el servidor');
-        return response.json();
-    })
-    .then(result => {
-        alert('Modelo cargado con éxito');
-        console.log(result);
-    })
-    .catch(error => {
-        alert('Error al enviar el modelo');
-        console.error(error);
+    // Enviar datos
+    document.getElementById("F1_boton_submit").addEventListener("click", function () {
+        if (!imagen_valida) {
+            alert("La imagen debe ser .jpg, .jpeg o .png");
+            return;
+        }
+
+        const imagenInput = document.getElementById('F1_imagen');
+        const imagenFile = imagenInput.files[0];
+
+        let matricula_var = document.getElementById('F1_matricula').value?.trim() || "-";
+
+        const formData = new FormData();
+        formData.append('modelo', document.getElementById('F1_modelo').value);
+        formData.append('version', document.getElementById('F1_version').value);
+        formData.append('proveedor', document.getElementById('F1_proveedor').value);
+        formData.append('matricula', matricula_var);
+        formData.append('precio', parseFloat(document.getElementById('F1_precio').value));
+        formData.append('color', document.getElementById('F1_color').value);
+        formData.append('anio', parseInt(document.getElementById('F1_anio').value, 10));
+        formData.append('serie', document.getElementById('F1_serie').value);
+        formData.append('estado', document.getElementById('F1_estado').value);
+
+        if (imagenFile) {
+            formData.append('imagen', imagenFile);
+        }
+
+        fetch('http://localhost:8080/api/autos/crear', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            if (!response.ok)
+                throw new Error('Error en el servidor');
+            return response.json();
+        })
+        .then(result => {
+            alert('Modelo cargado con éxito');
+            console.log(result);
+        })
+        .catch(error => {
+            alert('Error al enviar el modelo');
+            console.error(error);
+        });
     });
 });
 
-
-function preview_de_imagen() {
-    var extensionesValidas = /(\.jpg|\.jpeg|\.png)$/i;
-    const f_imagen = document.getElementById("F1_imagen");
-    if (f_imagen) {
-        if (!extensionesValidas.exec(f_imagen.value)) {
-            alert("El formato de la imagen debe ser .jpg, .jpeg o .png");
-            document.getElementById('F1_imagen_preview').src = "images/imagen-placeholder-para-autos.jpg";
-            document.getElementById('F1_imagen').value = "";
-            imagen_valida = false;
-        } else {
-            document.getElementById('F1_imagen_preview').src = URL.createObjectURL(f_imagen.files[0]);
-            imagen_valida = true;
-        }
-    } else {
-        imagen_valida = false;
-    }
-}
