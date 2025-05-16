@@ -18,7 +18,8 @@
   <link rel="stylesheet" href="css/webkits_personalizados.css">
 
 </head>
-<body onload="inicio_pagina_formulario()">
+
+<body">
 
   <div class="Wrap">
     
@@ -78,7 +79,7 @@
           <div class="form-group">
 
               <label for="F5_metodo">Método de pago</label>
-              <select name="F5_metodo" id="select_metodo_pago">
+              <select name="F5_metodo" id="F5_select_metodo_pago">
                   <option value="efectivo">Efectivo</option>
                   <option value="credito">Crédito</option>
                   <option value="debito">Débito</option>
@@ -88,42 +89,33 @@
           </div>
 
           <div class="form-group">
-              <label for="F5_descuento">Descuento</label>
-              <input type="number" id="F5_descuento" placeholder="Sin descuento" min="0" max="100" step="0.01">
+              <label for="F5_descuento" id="F5_label_descuento">Descuento (%)</label>
+              <input type="number" id="F5_descuento" placeholder="Sin descuento" min="0" max="100" step="0.01" onchange="actualizar_subtotal_y_total()">
           </div>
 
           <div class="form-group">
               <label for="F5_vehiculo_a_agregar">ID del vehículo</label>
               <input type="text" id="F5_vehiculo_a_agregar">
               <div style="display: flex; justify-content: space-between; text-align: center;">
-                <input type="button" value="Agregar" class="Botones_secundarios">
-                <input type="number" value="1" min="1" max="999" class="Botones_secundarios" placeholder="Cantidad" id="F5_cantidad_a_agregar">
-                <input type="button" value="Borrar último" class="Botones_secundarios">
-                <input type="button" value="Borrar todos" class="Botones_secundarios">
+                <input type="button" value="Agregar" class="Botones_secundarios" onclick="agregar_vehiculo()">
+                <input type="number" value="1" min="1" max="200" class="Botones_secundarios" placeholder="Cantidad" id="F5_cantidad">
+                <input type="button" value="Borrar último" class="Botones_secundarios" onclick="borrar_ultimo_vehiculo()">
+                <input type="button" value="Borrar todos" class="Botones_secundarios" onclick="borrar_todos_vehiculos()">
               </div>
 
               <br>
               <p>Vehículos agregados:</p>
               
-              <table id="tabla_vehiculos_agregados" style="background-color: white;">
-                <tbody>
-                  <tr>
+              <table style="background-color: white;">
+                <tbody id="tbody_tabla_vehiculos_agregados">
+                  <tr id="F5_fila_encabezado">
                     <th>ID</th>
                     <th>Modelo</th>
-                    <th>Serie</th>
+                    <th>Version</th>
                     <th>Cantidad</th>
                     <th>Precio unitario</th>
                     <th>Precio total</th>
                     <th></th> <!--columna para los botones de borrar-->
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td><input type="button" value="Borrar" style="width: 80px;" class="Botones_secundarios"></td>
                   </tr>
                 </tbody>
 
@@ -131,7 +123,7 @@
 
               <br>
               <p id="F5_precio_subtotal">Subtotal: $</p>
-              <p id="F5_precio_total">Total: $</p>
+              <p id="F5_precio_total">Total (IVA incluído): $</p>
               <br>
 
 
@@ -156,8 +148,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
   
   <script src="js/script_vista_principal.js"></script>
-  <script src="js/script_formularios.js"></script>
-  <script src="js/script_venta.js"></script>
+  <script src="js/script_formulario-cargar-venta.js"></script>
 </body>
 
 
