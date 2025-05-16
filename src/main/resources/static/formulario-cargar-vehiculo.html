@@ -18,7 +18,8 @@
   <link rel="stylesheet" href="css/webkits_personalizados.css">
 
 </head>
-<body onload="inicio_pagina_formulario()">
+
+<body>
 
   <div class="Wrap">
     
@@ -68,52 +69,60 @@
               <label for="F1_modelo">Modelo</label>
               <select id="F1_modelo" required>
                   <option>--Seleccione un modelo--</option>
-              </select></div>
+              </select>
+          </div>
           
           <div class="form-group">
               <label for="F1_version">Versión</label>
               <select id="F1_version" required>
                   <option>--Seleccione una versión--</option>
-              </select></div>
+              </select>
+          </div>
               
           <div class="form-group">
               <label for="F1_proveedor">Proveedor</label>
               <select id="F1_proveedor" required>
                   <option>Renault</option>
               </select></div>
-              
+          
           <div class="form-group">
               <label for="F1_matricula">Matrícula</label>
-              <input id="F1_matricula" type="text" placeholder="Dejar vacío para vehículos sin matricula"></div>
+              <input id="F1_matricula" type="text" placeholder="Dejar vacío para vehículos sin matricula">
+          </div>
           
           <div class="form-group">
               <label for="F1_precio">Precio (ARS)</label>
-              <input id="F1_precio" type="number" required min="0"></div>
+              <input id="F1_precio" type="number" required min="0">
+          </div>
               
           <div class="form-group">
               <label for="F1_color">Color</label>
-              <input id="F1_color" type="text" required></div>
+              <input id="F1_color" type="text" required>
+          </div>
               
           <div class="form-group">
               <label for="F1_anio">Año</label>
-              <input id="F1_anio" type="number" required min="1900" max="2099"></div>
+              <input id="F1_anio" type="number" required min="1900" max="2099">
+          </div>
               
           <div class="form-group">
               <label for="F1_serie">Número de serie</label>
               <input id="F1_serie" type="text" required>
-          
-          </div><div class="form-group">
-              <label for="F1_kilometraje">Kilometraje</label>
-              <input id="F1_kilometraje" type="number" required min="0" step="0.01"></div>
+          </div>
               
           <div class="form-group"><label for="F1_estado">Estado del vehículo</label>
               <select id="F1_estado" required>
                   <option>--Seleccione un estado--</option>
-              </select></div>
+              </select>
+          </div>
               
           <div class="form-group">
               <label for="F1_imagen">Imagen</label>
-              <input id="F1_imagen" type="file" required>
+              <input id="F1_imagen" type="file" onchange="preview_de_imagen()" accept="image/*" required>
+          </div>
+
+          <div style="display: flex; justify-content: center; margin-bottom: 20px;">
+            <img src="images/imagen-placeholder-para-autos.jpg" style="max-width: 300px; max-height: 300px; border-radius: 5px;" id="F1_imagen_preview">
           </div>
 
           <button type="submit" class="Cargar">Cargar Vehículo</button>

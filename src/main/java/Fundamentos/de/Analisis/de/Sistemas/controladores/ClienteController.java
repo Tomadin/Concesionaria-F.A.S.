@@ -19,11 +19,11 @@ public class ClienteController {
     
     @PostMapping("/crear")
     public Cliente crearModelo(@RequestBody Cliente cliente){
-        return servicio.guardar(cliente);
+        return servicio.guardarCliente(cliente);
     }
     
     @GetMapping("")
     public List<Cliente> obtenerModelos(){
-        return servicio.listarTodos();
+        return servicio.obtenerTodos();
     }
 }

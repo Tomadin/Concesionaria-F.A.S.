@@ -8,8 +8,6 @@ document.getElementById('formulario_modelo').addEventListener('submit', function
         motor: document.getElementById('F2_motor').value,
         transmision: document.getElementById('F2_transmision').value,
         cantPuertas: parseInt(document.getElementById('F2_nro_puertas').value, 10)
-
-
     };
 
 

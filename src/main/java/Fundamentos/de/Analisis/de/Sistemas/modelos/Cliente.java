@@ -10,11 +10,12 @@ import java.util.Date;
 public class Cliente {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private int DNI;
+    private long id;
     @Basic
     private String nombre;
     private String apellido;
     private String  telefono;
+    private int dni;
     private String calle;
     private String  numeroCalle;
     private String correoElectronico;
@@ -25,8 +26,9 @@ public class Cliente {
     public Cliente() {
     }
 
+
     public Cliente(int DNI, String nombre, String Apellido, String  Telefono, String calle, String  NumeroCalle, String CorreoElectronico, Date FechaNacimiento) {
-        this.DNI = DNI;
+        this.dni = DNI;
         this.nombre = nombre;
         this.apellido = Apellido;
         this.telefono = Telefono;
@@ -36,13 +38,23 @@ public class Cliente {
         this.fechaNacimiento = FechaNacimiento;
     }
 
-    public int getDNI() {
-        return DNI;
+    public long getId() {
+        return id;
     }
 
-    public void setDNI(int DNI) {
-        this.DNI = DNI;
+    public void setId(long id) {
+        this.id = id;
     }
+
+    public int getDni() {
+        return dni;
+    }
+
+    public void setDni(int dni) {
+        this.dni = dni;
+    }
+
+    
 
     public String getNombre() {
         return nombre;
@@ -59,6 +71,7 @@ public class Cliente {
     public void setApellido(String Apellido) {
         this.apellido = Apellido;
     }
+
 
     public String  getTelefono() {
         return telefono;
