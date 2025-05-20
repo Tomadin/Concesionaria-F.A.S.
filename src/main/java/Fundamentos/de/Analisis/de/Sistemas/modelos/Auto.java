@@ -1,6 +1,7 @@
 package Fundamentos.de.Analisis.de.Sistemas.modelos;
 
 import jakarta.persistence.*;
+import java.util.Base64;
 
 
 @Entity
@@ -147,6 +148,13 @@ public class Auto {
 
     public void setPrecio(float Precio) {
         this.precio = Precio;
+    }
+    
+    public String getImagenBase64() {
+        if (imagen != null && imagen.length > 0) {
+            return Base64.getEncoder().encodeToString(imagen);
+        }
+        return null;
     }
     
     

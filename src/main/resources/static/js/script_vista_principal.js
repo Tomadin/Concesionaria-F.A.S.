@@ -21,13 +21,13 @@ async function inicio(){ //funcion llamada por el body del html cada vez que se 
                 "Renault", 
                 "Disponible", 
                 v.stock, 
-                v.imagen,
+                v.imagenBase64,
                 v.motor,
                 v.carroceria,
                 v.transmision,
                 v.modelo.cantPuertas
             );
-    console.log(v.anioFabricacion);
+    console.log(v.imagenBase64);
         });
 
     } catch (error) {
@@ -87,7 +87,7 @@ function nueva_fila(vehiculo_id, modelo, version, color, precio, serie, anio, pr
         imagen_url = "images/imagen-placeholder-para-autos.jpg";
         console.log("Estableciendo imagen por defecto");
     }else{
-        nueva_imagen.src = imagen_url;
+        nueva_imagen.src =  `data:image/jpeg;base64,${imagen_url}`;
     }
 
     nueva_imagen.className = "Imagenes_auto_filas";
