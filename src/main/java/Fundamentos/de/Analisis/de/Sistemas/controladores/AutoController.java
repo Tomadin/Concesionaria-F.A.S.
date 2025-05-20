@@ -2,14 +2,21 @@
 package Fundamentos.de.Analisis.de.Sistemas.controladores;
 
 import Fundamentos.de.Analisis.de.Sistemas.modelos.Auto;
+import Fundamentos.de.Analisis.de.Sistemas.modelos.Modelo;
 import Fundamentos.de.Analisis.de.Sistemas.servicios.AutoServicio;
+import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 
 @Controller
@@ -25,12 +32,48 @@ public class AutoController {
         return "formulario-cargar-vehiculo";
     }
     
-    @PostMapping("/guardar")
-    public String guardarAuto(@ModelAttribute Auto auto){
-        autoServicio.guardarAuto(auto);
-        return "redirect:/autos/listar";
+
+    
+    @PostMapping("/crear")
+    @ResponseBody
+    public ResponseEntity<?> crearAuto(
+        @RequestParam("modelo") Modelo modelo,
+        @RequestParam("version") String version,
+        @RequestParam("proveedor") String proveedor,
+        @RequestParam("matricula") String matricula,
+        @RequestParam("precio") float precio,
+        @RequestParam("color") String color,
+        @RequestParam("anio") int anio,
+        @RequestParam(value = "imagen", required = false) MultipartFile imagen
+    ) {
+        System.out.println("ENTRO AL BACK");
         
+        System.out.println(modelo.toString());
+        
+        try {
+            Auto auto = new Auto();
+            auto.setModelo(modelo);
+            auto.setVersion(version);
+            auto.setProveedor(proveedor);
+            auto.setMatricula(matricula);
+            auto.setPrecio(precio);
+            auto.setColor(color);
+            auto.setAnioFrabricacion(anio);
+            auto.setStock(10);
+            if (imagen != null && !imagen.isEmpty()) {
+                auto.setImagen(imagen.getBytes()); 
+            }
+
+            autoServicio.guardarAuto(auto);
+            return ResponseEntity.ok(auto); 
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al procesar la imagen");
+        }
     }
+    
+    
+    
     @GetMapping("/listar")
     
     public String listarAutos(Model model){

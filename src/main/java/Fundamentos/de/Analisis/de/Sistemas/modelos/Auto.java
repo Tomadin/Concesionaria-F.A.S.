@@ -8,29 +8,84 @@ public class Auto {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
-    
     private String color;
     private int AnioFrabricacion;
-    private String modelo;
+    @ManyToOne
+    @JoinColumn(name = "modelo_id")
+    private Modelo modelo;
     private int stock;
     private int Kilometraje;
-    private int Puertas;
-    private float Precio;
+    private float precio;
+    private String version;
+    private String proveedor;
+    private String matricula;
+    @Lob
+    @Column(name = "imagen", columnDefinition = "LONGBLOB")
+    private byte[] imagen;
 
     public Auto() {
     }
 
-    public Auto(long id, String color, int AnioFrabricacion, String modelo, int stock, int Kilometraje, int Puertas, float Precio) {
+    public Auto(long id, String color, int AnioFrabricacion, Modelo modelo, int stock, int Kilometraje, float precio, String version, String proveedor, String matricula, byte[] imagen) {
         this.id = id;
         this.color = color;
         this.AnioFrabricacion = AnioFrabricacion;
         this.modelo = modelo;
         this.stock = stock;
         this.Kilometraje = Kilometraje;
-        this.Puertas = Puertas;
-        this.Precio = Precio;
+        this.precio = precio;
+        this.version = version;
+        this.proveedor = proveedor;
+        this.matricula = matricula;
+        this.imagen = imagen;
     }
 
+    public Modelo getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(Modelo modelo) {
+        this.modelo = modelo;
+    }
+
+    
+
+    public byte[] getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(byte[] imagen) {
+        this.imagen = imagen;
+    }
+
+    
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
+
+    public String getProveedor() {
+        return proveedor;
+    }
+
+    public void setProveedor(String proveedor) {
+        this.proveedor = proveedor;
+    }
+
+    public String getMatricula() {
+        return matricula;
+    }
+
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
+    }
+
+    
+    
     public long getId() {
         return id;
     }
@@ -55,13 +110,7 @@ public class Auto {
         this.AnioFrabricacion = AnioFrabricacion;
     }
 
-    public String getModelo() {
-        return modelo;
-    }
-
-    public void setModelo(String modelo) {
-        this.modelo = modelo;
-    }
+    
 
     public int getStock() {
         return stock;
@@ -79,20 +128,14 @@ public class Auto {
         this.Kilometraje = Kilometraje;
     }
 
-    public int getPuertas() {
-        return Puertas;
-    }
-
-    public void setPuertas(int Puertas) {
-        this.Puertas = Puertas;
-    }
+    
 
     public float getPrecio() {
-        return Precio;
+        return precio;
     }
 
     public void setPrecio(float Precio) {
-        this.Precio = Precio;
+        this.precio = Precio;
     }
     
     
