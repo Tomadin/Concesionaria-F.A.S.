@@ -5,13 +5,14 @@ import Fundamentos.de.Analisis.de.Sistemas.modelos.Auto;
 import Fundamentos.de.Analisis.de.Sistemas.modelos.Modelo;
 import Fundamentos.de.Analisis.de.Sistemas.servicios.AutoServicio;
 import java.io.IOException;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -44,6 +45,7 @@ public class AutoController {
         @RequestParam("precio") float precio,
         @RequestParam("color") String color,
         @RequestParam("anio") int anio,
+        @RequestParam("serie") String serie,
         @RequestParam(value = "imagen", required = false) MultipartFile imagen
     ) {
         System.out.println("ENTRO AL BACK");
@@ -58,8 +60,9 @@ public class AutoController {
             auto.setMatricula(matricula);
             auto.setPrecio(precio);
             auto.setColor(color);
-            auto.setAnioFrabricacion(anio);
+            auto.setAnioFabricacion(anio);
             auto.setStock(10);
+            auto.setSerie(serie);
             if (imagen != null && !imagen.isEmpty()) {
                 auto.setImagen(imagen.getBytes()); 
             }
@@ -75,9 +78,9 @@ public class AutoController {
     
     
     @GetMapping("/listar")
-    
-    public String listarAutos(Model model){
-        model.addAttribute("autos",autoServicio.obtenerTodos());
-        return "lista-autos";
+    @ResponseBody //Lo convierte en un JSON
+    @CrossOrigin(origins = "http://localhost:8080")
+    public List<Auto> listarAutos(){
+        return autoServicio.obtenerTodos();
     }
 }

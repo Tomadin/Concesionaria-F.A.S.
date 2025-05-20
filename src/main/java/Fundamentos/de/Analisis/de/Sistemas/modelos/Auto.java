@@ -9,7 +9,7 @@ public class Auto {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
     private String color;
-    private int AnioFrabricacion;
+    private int AnioFabricacion;
     @ManyToOne
     @JoinColumn(name = "modelo_id")
     private Modelo modelo;
@@ -19,6 +19,7 @@ public class Auto {
     private String version;
     private String proveedor;
     private String matricula;
+    private String serie;
     @Lob
     @Column(name = "imagen", columnDefinition = "LONGBLOB")
     private byte[] imagen;
@@ -26,10 +27,10 @@ public class Auto {
     public Auto() {
     }
 
-    public Auto(long id, String color, int AnioFrabricacion, Modelo modelo, int stock, int Kilometraje, float precio, String version, String proveedor, String matricula, byte[] imagen) {
+    public Auto(long id, String color, int AnioFabricacion, Modelo modelo, int stock, int Kilometraje, float precio, String version, String proveedor, String matricula, String serie, byte[] imagen) {
         this.id = id;
         this.color = color;
-        this.AnioFrabricacion = AnioFrabricacion;
+        this.AnioFabricacion = AnioFabricacion;
         this.modelo = modelo;
         this.stock = stock;
         this.Kilometraje = Kilometraje;
@@ -37,9 +38,19 @@ public class Auto {
         this.version = version;
         this.proveedor = proveedor;
         this.matricula = matricula;
+        this.serie = serie;
         this.imagen = imagen;
     }
 
+    public String getSerie() {
+        return serie;
+    }
+
+    public void setSerie(String serie) {
+        this.serie = serie;
+    }
+
+    
     public Modelo getModelo() {
         return modelo;
     }
@@ -102,12 +113,12 @@ public class Auto {
         this.color = color;
     }
 
-    public int getAnioFrabricacion() {
-        return AnioFrabricacion;
+    public int getAnioFabricacion() {
+        return AnioFabricacion;
     }
 
-    public void setAnioFrabricacion(int AnioFrabricacion) {
-        this.AnioFrabricacion = AnioFrabricacion;
+    public void setAnioFabricacion(int AnioFabricacion) {
+        this.AnioFabricacion = AnioFabricacion;
     }
 
     

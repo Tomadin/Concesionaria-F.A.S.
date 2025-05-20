@@ -1,9 +1,43 @@
-function inicio(){ //funcion llamada por el body del html cada vez que se carga la página
+async function inicio(){ //funcion llamada por el body del html cada vez que se carga la página
 
     array_filas = [];
     diccionario_atributos = {};
 
+    try {
+        const response = await fetch('http://localhost:8080/autos/listar');
+        if (!response.ok) throw new Error('Error al cargar vehículos');
+
+        const vehiculos = await response.json(); // Parseamos JSON
+
+        vehiculos.forEach(v => {
+            nueva_fila(
+                v.id, 
+                v.modelo.nombre, 
+                v.version, 
+                v.color, 
+                v.precio, 
+                v.serie, 
+                v.anioFabricacion, 
+                "Renault", 
+                "Disponible", 
+                v.stock, 
+                v.imagen,
+                v.motor,
+                v.carroceria,
+                v.transmision,
+                v.modelo.cantPuertas
+            );
+    console.log(v.anioFabricacion);
+        });
+
+    } catch (error) {
+        console.error('Hubo un error al obtener los vehículos:', error);
+    }
+    
+
+
     //debug, filas de ejemplo
+    /*
     nueva_fila(1, "Logan", "Life 1.6", "Gris", 24800000, "A1234", 2019, "proveedor1", "Disponible", 5, null, null, null, null, null);
     nueva_fila(2, "Kangoo", "Zen 1.6", "Rojo", 30000000, "A1634", 2020, "proveedor2", "Vendido", 2, null, null, null, null, null);
     nueva_fila(3, "Sandero", "Life 1.6", "Azul", 22000000, "A2345", 2021, "proveedor3", "Disponible", 3, null, null, null, null, null);
@@ -14,12 +48,16 @@ function inicio(){ //funcion llamada por el body del html cada vez que se carga 
     nueva_fila(8, "Stepway", "Intents 1.6 CVT", "Blanco", 28000000, "HS7691", 2025, "proveedor4", "Almacenado", 1, null, null, null, null, null);
     nueva_fila(9, "Master", "Furgon L1H1", "Blanco", 54080000, "A6797", 2022, "proveedor5", "Disponible", 3, null, null, null, null, null);
     nueva_fila(10, "Alskan", "Confort 2.3 dCi 160 2WD", "Azul", 36360000, "HS4561", 2023, "proveedor2", "Disponible", 0, null, null, null, null, null);
+    */
+     
 }
 
 var array_filas = []; //array que contiene las filas de la tabla
 var diccionario_atributos = {} //diccionario que contiene los atributos cada vehiculo, y de su modelo - serie
 
 function nueva_fila(vehiculo_id, modelo, version, color, precio, serie, anio, proveedor, estado, stock, imagen_url, motor, carroceria, transmision, puertas){
+
+    console.log(anio);
 
     const tabla = document.getElementById("tabla_stock")
 
