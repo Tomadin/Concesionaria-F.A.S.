@@ -34,7 +34,13 @@ async function inicio(){ //funcion llamada por el body del html cada vez que se 
         console.error('Hubo un error al obtener los vehículos:', error);
     }
     
-
+    //parámetro de la url que resulta de usar la búsqueda desde otra página como los formularios
+    const hash = window.location.hash;
+    if (hash) {
+        const busqueda = hash.substring(1);
+        document.getElementById("input_buscar").value = busqueda;
+        filtrar_filas(true);
+    }
 
     //debug, filas de ejemplo
     /*
@@ -294,7 +300,15 @@ function filtrar_filas(suprimir_alerta){
         });
 
     }else if(!suprimir_alerta){
-        alert("Salir de la página actual");
+        if(!confirm("Salir de la página actual? Se perderán los cambios realizados.")){
+            return;
+        }
+
+        const busqueda = document.getElementById("input_buscar").value
+        const urlRedireccion = `${"http://localhost:8080/"}#${busqueda}`;
+
+        // Redireccionar a la nueva URL
+        window.location.href = urlRedireccion;
     }
 }
 

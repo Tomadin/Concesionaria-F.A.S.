@@ -30,11 +30,11 @@ document.getElementById('formulario_proveedor').addEventListener('submit', funct
                 return response.json();
             })
             .then(result => {
-                alert('Modelo cargado con éxito');
+                alert('Proveedorcargado con éxito');
                 console.log(result);
             })
             .catch(error => {
-                alert('Error al enviar el modelo');
+                alert('Error al enviar el proveedor');
                 console.error(error);
             });
 });
