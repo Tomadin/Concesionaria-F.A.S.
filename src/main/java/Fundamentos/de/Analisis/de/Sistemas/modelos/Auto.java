@@ -1,13 +1,15 @@
 package Fundamentos.de.Analisis.de.Sistemas.modelos;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.util.Base64;
 
-
 @Entity
 public class Auto {
+
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String color;
     private int AnioFabricacion;
@@ -24,12 +26,12 @@ public class Auto {
     @Lob
     @Column(name = "imagen", columnDefinition = "LONGBLOB")
     private byte[] imagen;
-    
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "venta_id")
+    @JsonIgnore
     private Venta venta;
 
-    
     public Auto() {
     }
 
@@ -56,8 +58,6 @@ public class Auto {
         this.venta = venta;
     }
 
-    
-    
     public String getSerie() {
         return serie;
     }
@@ -66,7 +66,6 @@ public class Auto {
         this.serie = serie;
     }
 
-    
     public Modelo getModelo() {
         return modelo;
     }
@@ -75,8 +74,6 @@ public class Auto {
         this.modelo = modelo;
     }
 
-    
-
     public byte[] getImagen() {
         return imagen;
     }
@@ -84,8 +81,6 @@ public class Auto {
     public void setImagen(byte[] imagen) {
         this.imagen = imagen;
     }
-
-    
 
     public String getVersion() {
         return version;
@@ -111,8 +106,6 @@ public class Auto {
         this.matricula = matricula;
     }
 
-    
-    
     public long getId() {
         return id;
     }
@@ -137,8 +130,6 @@ public class Auto {
         this.AnioFabricacion = AnioFabricacion;
     }
 
-    
-
     public int getStock() {
         return stock;
     }
@@ -155,8 +146,6 @@ public class Auto {
         this.Kilometraje = Kilometraje;
     }
 
-    
-
     public float getPrecio() {
         return precio;
     }
@@ -164,7 +153,7 @@ public class Auto {
     public void setPrecio(float Precio) {
         this.precio = Precio;
     }
-    
+
     public String getImagenBase64() {
         if (imagen != null && imagen.length > 0) {
             return Base64.getEncoder().encodeToString(imagen);
@@ -177,8 +166,4 @@ public class Auto {
         return "Auto{" + "id=" + id + ", color=" + color + ", AnioFabricacion=" + AnioFabricacion + ", modelo=" + modelo + ", stock=" + stock + ", Kilometraje=" + Kilometraje + ", precio=" + precio + ", version=" + version + ", proveedor=" + proveedor + ", matricula=" + matricula + ", serie=" + serie + ", imagen=" + imagen + '}';
     }
 
-    
-    
-    
 }
-

@@ -4,6 +4,7 @@
  */
 package Fundamentos.de.Analisis.de.Sistemas.modelos;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,7 +21,8 @@ public class Venta {
     private String dni_cliente;
     private String dni_empleado;
     private String metodo_pago;
-    @OneToMany(mappedBy = "venta", cascade = CascadeType.ALL, orphanRemoval = true)
+     @OneToMany(mappedBy = "venta", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties({"venta"})
     private List<Auto> vehiculos;
     private String observaciones;
 
