@@ -48,9 +48,7 @@ public class AutoController {
         @RequestParam("serie") String serie,
         @RequestParam(value = "imagen", required = false) MultipartFile imagen
     ) {
-        System.out.println("ENTRO AL BACK");
-        
-        System.out.println(modelo.toString());
+
         
         try {
             Auto auto = new Auto();
