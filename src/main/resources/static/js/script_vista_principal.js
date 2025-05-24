@@ -34,7 +34,13 @@ async function inicio(){ //funcion llamada por el body del html cada vez que se 
         console.error('Hubo un error al obtener los vehículos:', error);
     }
     
-
+    //parámetro de la url que resulta de usar la búsqueda desde otra página como los formularios
+    const hash = window.location.hash;
+    if (hash) {
+        const busqueda = hash.substring(1);
+        document.getElementById("input_buscar").value = busqueda;
+        filtrar_filas(true);
+    }
 
     //debug, filas de ejemplo
     /*
@@ -294,7 +300,15 @@ function filtrar_filas(suprimir_alerta){
         });
 
     }else if(!suprimir_alerta){
-        alert("Salir de la página actual");
+        if(!confirm("Salir de la página actual? Se perderán los cambios realizados.")){
+            return;
+        }
+
+        const busqueda = document.getElementById("input_buscar").value
+        const urlRedireccion = `${"http://localhost:8080/"}#${busqueda}`;
+
+        // Redireccionar a la nueva URL
+        window.location.href = urlRedireccion;
     }
 }
 
@@ -306,11 +320,13 @@ function abrir_ventana_auto(p_id){ //parámetro id
     llenar_vista_completa(p_id);
 }
 
+//cerrar vista completa del auto
 function cerrar_ventana_auto(){
     var ventana = document.getElementById("ventana_auto");
     ventana.hidden = true;
 }
 
+//cerrar vista completa del auto al presionar la tecla esc
 document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape') {
     cerrar_ventana_auto();
@@ -328,9 +344,10 @@ function llenar_vista_completa(p_id){
   }
 
   if(diccionario_atributos[p_id][10]===undefined || diccionario_atributos[p_id][10]===null || diccionario_atributos[p_id][11] === 0){
-    document.getElementById("v_c_imagen").src = "images/imagen-no-disponible.png"; // O una imagen por defecto
+    document.getElementById("v_c_imagen").src = "images/imagen-placeholder-para-autos.jpg"; // imagen por defecto
   } else {
-    document.getElementById("v_c_imagen").src = diccionario_atributos[p_id][10];
+    const imagen = diccionario_atributos[p_id][10];
+    document.getElementById("v_c_imagen").src = `data:image/jpeg;base64,${imagen}`;
   }
 
   if(diccionario_atributos[p_id][1]===undefined || diccionario_atributos[p_id][1]===null){

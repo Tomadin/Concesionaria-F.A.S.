@@ -107,7 +107,7 @@ document.addEventListener("DOMContentLoaded", function () {
         formData.append('color', document.getElementById('F1_color').value);
         formData.append('anio', parseInt(document.getElementById('F1_anio').value, 10));
         formData.append('serie', document.getElementById('F1_serie').value);
-        formData.append('cantPuertas', modeloSeleccionado.cantPuertas); // 👈 clave
+        formData.append('cantPuertas', modeloSeleccionado.cantPuertas); // <--- clave
 
         if (imagenFile) {
             formData.append('imagen', imagenFile);
@@ -125,11 +125,11 @@ document.addEventListener("DOMContentLoaded", function () {
                     return response.json();
                 })
                 .then(result => {
-                    alert('Modelo cargado con éxito');
+                    alert('Vehiculo cargado con éxito');
                     console.log(result);
                 })
                 .catch(error => {
-                    alert('Error al enviar el modelo');
+                    alert('Error al enviar el vehiculo');
                     console.error(error);
                 });
     });

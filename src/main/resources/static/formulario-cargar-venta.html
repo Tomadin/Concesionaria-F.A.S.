@@ -34,11 +34,11 @@
           <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="margin-left: auto;">
 
             <li class="nav-item Botones_navegacion">
-              <a class="nav-link Links_barra" href="#">Nueva venta</a>
+              <a class="nav-link Links_barra" href="http://localhost:8080/venta">Nueva venta</a>
             </li>
 
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle Links_barra" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <a class="nav-link dropdown-toggle Links_barra" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Cargar datos
               </a>
               <ul class="dropdown-menu Desplegable">
@@ -66,18 +66,18 @@
       <form id="formulario_venta"> <!--Formulario 5 - F5-->
 
           <div class="form-group">
-              <label for="F5_dni_cliente">DNI cliente</label>
+              <label>DNI cliente</label>
               <input id="F5_dni_cliente" type="number" min="0" required>
           </div>
 
           <div class="form-group">
-              <label for="F5_dni_empleado">DNI empleado</label>
+              <label>DNI empleado</label>
               <input id="F5_dni_empleado" type="number" min="0" required>
           </div>
 
           <div class="form-group">
 
-              <label for="F5_metodo">Método de pago</label>
+              <label>Método de pago</label>
               <select name="F5_metodo" id="F5_select_metodo_pago">
                   <option value="efectivo">Efectivo</option>
                   <option value="credito">Crédito</option>
@@ -87,49 +87,57 @@
               </select>
           </div>
 
+          <div class="Separador" style="margin-top: 2rem;"></div>
+
           <div class="form-group">
-              <label for="F5_descuento" id="F5_label_descuento">Descuento (%)</label>
-              <input type="number" id="F5_descuento" placeholder="Sin descuento" min="0" max="100" step="0.01" onchange="actualizar_subtotal_y_total()">
+              <label>Modelo</label>
+              <select id="F5_select_modelo" onchange="actualizar_disponibilidad()">
+                <option value="modelo_default_option">--Seleccione un modelo--</option>
+              </select>
+          </div>
+          
+          <div class="form-group">
+            <label>Color</label>
+            <select id="F5_select_color"  onchange="actualizar_disponibilidad()">
+              <option value="color_default_option">--Seleccione un color--</option>
+            </select>
+
+            <p style="margin-top: 8px;" id="F5_disponibilidad">Seleccione un modelo y un color para ver la disponibilidad</p>
+
+            <div style="display: flex; justify-content: space-between; text-align: center;">
+            <input type="button" value="Agregar" class="Botones_secundarios" onclick="agregar_vehiculo()">
+            <input type="number" value="1" min="1" max="100" class="Botones_secundarios" placeholder="Cantidad" id="F5_cantidad">
+            <input type="button" value="Borrar último" class="Botones_secundarios" onclick="borrar_ultimo_vehiculo()">
+            <input type="button" value="Borrar todos" class="Botones_secundarios" onclick="borrar_todos_vehiculos()">
+            </div>
+
+            <br>
+            <p>Vehículos agregados:</p>
+            
+            <table style="background-color: white;">
+              <tbody id="tbody_tabla_vehiculos_agregados">
+                <tr id="F5_fila_encabezado">
+                  <th>Modelo</th>
+                  <th>Version</th>
+                  <th>Color</th>
+                  <th>Cantidad</th>
+                  <th>Precio unitario</th>
+                  <th>Precio total</th>
+                  <th></th> <!--columna para los botones de borrar-->
+                </tr>
+              </tbody>
+
+            </table>
+
+            <br>
+            <p id="F5_precio_subtotal">Subtotal: $</p>
+            <p id="F5_precio_total">Total (IVA incluído): $</p>
           </div>
 
-          <div class="form-group">
-              <label for="F5_vehiculo_a_agregar">ID del vehículo</label>
-              <input type="text" id="F5_vehiculo_a_agregar">
-              <div style="display: flex; justify-content: space-between; text-align: center;">
-                <input type="button" value="Agregar" class="Botones_secundarios" onclick="agregar_vehiculo()">
-                <input type="number" value="1" min="1" max="200" class="Botones_secundarios" placeholder="Cantidad" id="F5_cantidad">
-                <input type="button" value="Borrar último" class="Botones_secundarios" onclick="borrar_ultimo_vehiculo()">
-                <input type="button" value="Borrar todos" class="Botones_secundarios" onclick="borrar_todos_vehiculos()">
-              </div>
-
-              <br>
-              <p>Vehículos agregados:</p>
-              
-              <table style="background-color: white;">
-                <tbody id="tbody_tabla_vehiculos_agregados">
-                  <tr id="F5_fila_encabezado">
-                    <th>ID</th>
-                    <th>Modelo</th>
-                    <th>Version</th>
-                    <th>Cantidad</th>
-                    <th>Precio unitario</th>
-                    <th>Precio total</th>
-                    <th></th> <!--columna para los botones de borrar-->
-                  </tr>
-                </tbody>
-
-              </table>
-
-              <br>
-              <p id="F5_precio_subtotal">Subtotal: $</p>
-              <p id="F5_precio_total">Total (IVA incluído): $</p>
-              <br>
-
-
-          </div>
+          <div class="Separador"></div>
 
           <div class="form-group">
-            <label for="F5_observaciones">Observaciones</label>
+            <label>Observaciones</label>
             <textarea id="F5_observaciones"></textarea>
 
           </div>
