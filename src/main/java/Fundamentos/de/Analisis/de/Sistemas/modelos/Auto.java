@@ -24,7 +24,12 @@ public class Auto {
     @Lob
     @Column(name = "imagen", columnDefinition = "LONGBLOB")
     private byte[] imagen;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "venta_id")
+    private Venta venta;
 
+    
     public Auto() {
     }
 
@@ -43,6 +48,16 @@ public class Auto {
         this.imagen = imagen;
     }
 
+    public Venta getVenta() {
+        return venta;
+    }
+
+    public void setVenta(Venta venta) {
+        this.venta = venta;
+    }
+
+    
+    
     public String getSerie() {
         return serie;
     }
@@ -156,6 +171,13 @@ public class Auto {
         }
         return null;
     }
+
+    @Override
+    public String toString() {
+        return "Auto{" + "id=" + id + ", color=" + color + ", AnioFabricacion=" + AnioFabricacion + ", modelo=" + modelo + ", stock=" + stock + ", Kilometraje=" + Kilometraje + ", precio=" + precio + ", version=" + version + ", proveedor=" + proveedor + ", matricula=" + matricula + ", serie=" + serie + ", imagen=" + imagen + '}';
+    }
+
+    
     
     
 }

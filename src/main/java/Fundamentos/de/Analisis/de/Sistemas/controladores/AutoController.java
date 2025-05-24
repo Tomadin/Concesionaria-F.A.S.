@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -74,11 +75,16 @@ public class AutoController {
     }
     
     
-    
     @GetMapping("/listar")
     @ResponseBody //Lo convierte en un JSON
     @CrossOrigin(origins = "http://localhost:8080")
     public List<Auto> listarAutos(){
         return autoServicio.obtenerTodos();
+    }
+    
+    
+    @PostMapping("/restarStock/{id}")
+    public void restarStock(@PathVariable int id, @RequestParam int cantidad) {
+    autoServicio.restarStock(id, cantidad);
     }
 }
