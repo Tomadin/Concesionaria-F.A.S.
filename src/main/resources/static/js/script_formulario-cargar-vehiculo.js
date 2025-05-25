@@ -109,6 +109,13 @@ document.addEventListener("DOMContentLoaded", function () {
         formData.append('serie', document.getElementById('F1_serie').value);
         formData.append('cantPuertas', modeloSeleccionado.cantPuertas); // <--- clave
         formData.append('estado', "DISPONIBLE");
+        formData.append('motor',document.getElementById('v_c_motor').value);
+        formData.append('carroceria',document.getElementById('v_c_carroceria').value);
+        formData.append('transmision',document.getElementById('v_c_transmision').value);
+        formData.append('cantpuertas',document.getElementById('v_c_puertas').value);
+        
+
+        
         if (imagenFile) {
             formData.append('imagen', imagenFile);
         }

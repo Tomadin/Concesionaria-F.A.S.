@@ -21,9 +21,9 @@ async function inicio(){ //funcion llamada por el body del html cada vez que se 
                 "Renault", 
                 v.estado, 
                 v.imagenBase64,
-                v.motor,
-                v.carroceria,
-                v.transmision,
+                v.modelo.motor,
+                v.modelo.carroceria,
+                v.modelo.transmision,
                 v.modelo.cantPuertas
             );
             console.log(v.imagenBase64);
@@ -82,6 +82,11 @@ function nueva_fila(vehiculo_id, modelo, version, color, precio, serie, anio, pr
     const celda_año = document.createElement("td")
     const celda_proveedor = document.createElement("td");
     const celda_estado = document.createElement("td");
+    const celda_motor = document.createElement("td");
+    const celda_carroceria=document.createElement("td");
+    const celda_transmision=document.createElement("td");
+    const celda_cantpuertas =document.createElement("td");
+    
 
     let imagen_valida = true; 
     //imagen_valida= checkImage(imagen_url); //IMPORTANTE - NO BORRAR - EN IMPLEMENTACIÓN (es para verificar que la imágen exista, sino se usa una de placeholder)
@@ -106,7 +111,8 @@ function nueva_fila(vehiculo_id, modelo, version, color, precio, serie, anio, pr
     celda_año.innerHTML = parseInt(anio);
     celda_proveedor.innerHTML = proveedor;
     celda_estado.innerHTML = estado;
-
+    
+    
     fila.appendChild(celda_imagen);
     fila.appendChild(celda_id_vehiculo);
     fila.appendChild(celda_modelo);
@@ -117,6 +123,8 @@ function nueva_fila(vehiculo_id, modelo, version, color, precio, serie, anio, pr
     fila.appendChild(celda_año);
     fila.appendChild(celda_proveedor);
     fila.appendChild(celda_estado);
+    
+    
 
     // pasa el ID de la fila como parámetro al hacer click en la fila
     fila.addEventListener('click', function() {
@@ -387,27 +395,27 @@ function llenar_vista_completa(p_id){
     document.getElementById("v_c_estado").innerHTML = "Estado del vehículo : " + diccionario_atributos[p_id][8];
   }
 
-  if(diccionario_atributos[p_id][10]===undefined || diccionario_atributos[p_id][12]===null){
+  if(diccionario_atributos[p_id][11]===undefined || diccionario_atributos[p_id][11]===null){
     document.getElementById("v_c_motor").innerHTML = "Motor : -";
   } else {
     document.getElementById("v_c_motor").innerHTML = "Motor : " + diccionario_atributos[p_id][11];
   }
 
-  if(diccionario_atributos[p_id][12]===undefined || diccionario_atributos[p_id][13]===null){
+  if(diccionario_atributos[p_id][12]===undefined || diccionario_atributos[p_id][12]===null){
     document.getElementById("v_c_carroceria").innerHTML = "Tipo de carroceria : -";
   } else {
-    document.getElementById("v_c_carroceria").innerHTML = "Tipo de carroceria : " + diccionario_atributos[p_id][13];
+    document.getElementById("v_c_carroceria").innerHTML = "Tipo de carroceria : " + diccionario_atributos[p_id][12];
   }
 
-  if(diccionario_atributos[p_id][13]===undefined || diccionario_atributos[p_id][14]===null){
+  if(diccionario_atributos[p_id][13]===undefined || diccionario_atributos[p_id][13]===null){
     document.getElementById("v_c_transmision").innerHTML = "Transmision : -";
   } else {
-    document.getElementById("v_c_transmision").innerHTML = "Transmision : " + diccionario_atributos[p_id][14];
+    document.getElementById("v_c_transmision").innerHTML = "Transmision : " + diccionario_atributos[p_id][13];
   }
 
-  if(diccionario_atributos[p_id][14]===undefined || diccionario_atributos[p_id][15]===null){
+  if(diccionario_atributos[p_id][14]===undefined || diccionario_atributos[p_id][14]===null){
     document.getElementById("v_c_puertas").innerHTML = "Número de puertas : -";
   } else {
-    document.getElementById("v_c_puertas").innerHTML = "Número de puertas : " + diccionario_atributos[p_id][15];
+    document.getElementById("v_c_puertas").innerHTML = "Número de puertas : " + diccionario_atributos[p_id][14];
   }
 }
