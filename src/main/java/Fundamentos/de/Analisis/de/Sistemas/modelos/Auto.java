@@ -11,12 +11,12 @@ public class Auto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    private String estado;
     private String color;
     private int AnioFabricacion;
     @ManyToOne
     @JoinColumn(name = "modelo_id")
     private Modelo modelo;
-    private int stock;
     private int Kilometraje;
     private float precio;
     private String version;
@@ -35,12 +35,12 @@ public class Auto {
     public Auto() {
     }
 
-    public Auto(long id, String color, int AnioFabricacion, Modelo modelo, int stock, int Kilometraje, float precio, String version, String proveedor, String matricula, String serie, byte[] imagen) {
+    public Auto(long id, String color, int AnioFabricacion, Modelo modelo, int Kilometraje, float precio, String version, String proveedor, String matricula, String serie, byte[] imagen) {
         this.id = id;
         this.color = color;
         this.AnioFabricacion = AnioFabricacion;
         this.modelo = modelo;
-        this.stock = stock;
+        this.estado = "DISPONIBLE";
         this.Kilometraje = Kilometraje;
         this.precio = precio;
         this.version = version;
@@ -130,14 +130,6 @@ public class Auto {
         this.AnioFabricacion = AnioFabricacion;
     }
 
-    public int getStock() {
-        return stock;
-    }
-
-    public void setStock(int stock) {
-        this.stock = stock;
-    }
-
     public int getKilometraje() {
         return Kilometraje;
     }
@@ -154,6 +146,15 @@ public class Auto {
         this.precio = Precio;
     }
 
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    
     public String getImagenBase64() {
         if (imagen != null && imagen.length > 0) {
             return Base64.getEncoder().encodeToString(imagen);
@@ -163,7 +164,8 @@ public class Auto {
 
     @Override
     public String toString() {
-        return "Auto{" + "id=" + id + ", color=" + color + ", AnioFabricacion=" + AnioFabricacion + ", modelo=" + modelo + ", stock=" + stock + ", Kilometraje=" + Kilometraje + ", precio=" + precio + ", version=" + version + ", proveedor=" + proveedor + ", matricula=" + matricula + ", serie=" + serie + ", imagen=" + imagen + '}';
+        return "Auto{" + "id=" + id + ", estado=" + estado + ", color=" + color + ", AnioFabricacion=" + AnioFabricacion + ", modelo=" + modelo + ", Kilometraje=" + Kilometraje + ", precio=" + precio + ", version=" + version + ", proveedor=" + proveedor + ", matricula=" + matricula + ", serie=" + serie + ", imagen=" + imagen + ", venta=" + (venta != null ? venta.getId() : "null") +
+            '}';
     }
 
 }

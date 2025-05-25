@@ -30,4 +30,9 @@ public class ClienteServicio {
     public void eliminarCliente(long id){
         repo.deleteById(id);
     }
+
+    public Optional<Cliente> buscarPorDni(int dni) {
+        return repo.findByDni(dni);
+    }
+
 }

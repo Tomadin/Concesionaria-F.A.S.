@@ -19,15 +19,14 @@ async function inicio(){ //funcion llamada por el body del html cada vez que se 
                 v.serie, 
                 v.anioFabricacion, 
                 "Renault", 
-                "Disponible", 
-                v.stock, 
+                v.estado, 
                 v.imagenBase64,
                 v.motor,
                 v.carroceria,
                 v.transmision,
                 v.modelo.cantPuertas
             );
-    console.log(v.imagenBase64);
+            console.log(v.imagenBase64);
         });
 
     } catch (error) {
@@ -61,7 +60,7 @@ async function inicio(){ //funcion llamada por el body del html cada vez que se 
 var array_filas = []; //array que contiene las filas de la tabla
 var diccionario_atributos = {} //diccionario que contiene los atributos cada vehiculo, y de su modelo - serie
 
-function nueva_fila(vehiculo_id, modelo, version, color, precio, serie, anio, proveedor, estado, stock, imagen_url, motor, carroceria, transmision, puertas){
+function nueva_fila(vehiculo_id, modelo, version, color, precio, serie, anio, proveedor, estado, imagen_url, motor, carroceria, transmision, puertas){
 
     console.log(anio);
 
@@ -83,7 +82,6 @@ function nueva_fila(vehiculo_id, modelo, version, color, precio, serie, anio, pr
     const celda_año = document.createElement("td")
     const celda_proveedor = document.createElement("td");
     const celda_estado = document.createElement("td");
-    const celda_stock = document.createElement("td");
 
     let imagen_valida = true; 
     //imagen_valida= checkImage(imagen_url); //IMPORTANTE - NO BORRAR - EN IMPLEMENTACIÓN (es para verificar que la imágen exista, sino se usa una de placeholder)
@@ -108,7 +106,6 @@ function nueva_fila(vehiculo_id, modelo, version, color, precio, serie, anio, pr
     celda_año.innerHTML = parseInt(anio);
     celda_proveedor.innerHTML = proveedor;
     celda_estado.innerHTML = estado;
-    celda_stock.innerHTML = parseInt(stock);
 
     fila.appendChild(celda_imagen);
     fila.appendChild(celda_id_vehiculo);
@@ -120,7 +117,6 @@ function nueva_fila(vehiculo_id, modelo, version, color, precio, serie, anio, pr
     fila.appendChild(celda_año);
     fila.appendChild(celda_proveedor);
     fila.appendChild(celda_estado);
-    fila.appendChild(celda_stock);
 
     // pasa el ID de la fila como parámetro al hacer click en la fila
     fila.addEventListener('click', function() {
@@ -132,7 +128,7 @@ function nueva_fila(vehiculo_id, modelo, version, color, precio, serie, anio, pr
 
     array_filas.push(fila);
 
-    diccionario_atributos["vehiculo_" + vehiculo_id] = [vehiculo_id, modelo, version, color, precio, serie, anio, proveedor, estado, stock, imagen_url, imagen_valida, motor, carroceria, transmision, puertas];
+    diccionario_atributos["vehiculo_" + vehiculo_id] = [vehiculo_id, modelo, version, color, precio, serie, anio, proveedor, estado, imagen_url, imagen_valida, motor, carroceria, transmision, puertas];
 }
 
 function checkImage(url) {
@@ -244,15 +240,8 @@ function ordenar_tabla(){
         }else{
             array_filas.sort((a, b) => b.children[9].innerHTML.localeCompare(a.children[9].innerHTML));
         }
-    }else if(variable_orden == "stock"){
-        if(tipo_orden == "ascendente"){
-            //array_filas.sort((a, b) => a.children[10].innerHTML.localeCompare(b.children[10].innerHTML));
-            array_filas.sort((a, b) => parseInt(a.children[10].innerHTML) - parseInt(b.children[10].innerHTML));
-        }else{
-            //array_filas.sort((a, b) => b.children[10].innerHTML.localeCompare(a.children[10].innerHTML));
-            array_filas.sort((a, b) => parseInt(b.children[10].innerHTML) - parseInt(a.children[10].innerHTML));
-        }
     }
+    
 
     for (let i = 0; i < array_filas.length; i++) {
         tabla.appendChild(array_filas[i]);
@@ -346,7 +335,7 @@ function llenar_vista_completa(p_id){
   if(diccionario_atributos[p_id][10]===undefined || diccionario_atributos[p_id][10]===null || diccionario_atributos[p_id][11] === 0){
     document.getElementById("v_c_imagen").src = "images/imagen-placeholder-para-autos.jpg"; // imagen por defecto
   } else {
-    const imagen = diccionario_atributos[p_id][10];
+    const imagen = diccionario_atributos[p_id][9];
     document.getElementById("v_c_imagen").src = `data:image/jpeg;base64,${imagen}`;
   }
 
@@ -398,16 +387,10 @@ function llenar_vista_completa(p_id){
     document.getElementById("v_c_estado").innerHTML = "Estado del vehículo : " + diccionario_atributos[p_id][8];
   }
 
-  if(diccionario_atributos[p_id][9]===undefined || diccionario_atributos[p_id][9]===null){
-    document.getElementById("v_c_stock").innerHTML = "Stock del modelo-version : -";
-  } else {
-    document.getElementById("v_c_stock").innerHTML = "Stock del modelo-version : " + diccionario_atributos[p_id][9];
-  }
-
-  if(diccionario_atributos[p_id][11]===undefined || diccionario_atributos[p_id][12]===null){
+  if(diccionario_atributos[p_id][10]===undefined || diccionario_atributos[p_id][12]===null){
     document.getElementById("v_c_motor").innerHTML = "Motor : -";
   } else {
-    document.getElementById("v_c_motor").innerHTML = "Motor : " + diccionario_atributos[p_id][12];
+    document.getElementById("v_c_motor").innerHTML = "Motor : " + diccionario_atributos[p_id][11];
   }
 
   if(diccionario_atributos[p_id][12]===undefined || diccionario_atributos[p_id][13]===null){

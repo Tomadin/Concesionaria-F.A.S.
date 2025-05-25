@@ -13,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -47,10 +46,9 @@ public class AutoController {
         @RequestParam("color") String color,
         @RequestParam("anio") int anio,
         @RequestParam("serie") String serie,
+        @RequestParam("estado") String estado,
         @RequestParam(value = "imagen", required = false) MultipartFile imagen
     ) {
-
-        
         try {
             Auto auto = new Auto();
             auto.setModelo(modelo);
@@ -59,8 +57,8 @@ public class AutoController {
             auto.setMatricula(matricula);
             auto.setPrecio(precio);
             auto.setColor(color);
+            auto.setEstado(estado);
             auto.setAnioFabricacion(anio);
-            auto.setStock(10);
             auto.setSerie(serie);
             if (imagen != null && !imagen.isEmpty()) {
                 auto.setImagen(imagen.getBytes()); 
@@ -82,9 +80,10 @@ public class AutoController {
         return autoServicio.obtenerTodos();
     }
     
-    
+    /*
     @PostMapping("/restarStock/{id}")
     public void restarStock(@PathVariable int id, @RequestParam int cantidad) {
     autoServicio.restarStock(id, cantidad);
     }
+*/
 }

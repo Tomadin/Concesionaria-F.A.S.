@@ -108,7 +108,7 @@ document.addEventListener("DOMContentLoaded", function () {
         formData.append('anio', parseInt(document.getElementById('F1_anio').value, 10));
         formData.append('serie', document.getElementById('F1_serie').value);
         formData.append('cantPuertas', modeloSeleccionado.cantPuertas); // <--- clave
-
+        formData.append('estado', "DISPONIBLE");
         if (imagenFile) {
             formData.append('imagen', imagenFile);
         }

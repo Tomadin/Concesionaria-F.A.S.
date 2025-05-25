@@ -38,6 +38,15 @@ public class Venta {
         this.observaciones = observaciones;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    
     public String getDni_cliente() {
         return dni_cliente;
     }
