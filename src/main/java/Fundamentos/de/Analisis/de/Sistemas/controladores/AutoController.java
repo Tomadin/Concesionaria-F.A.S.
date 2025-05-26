@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -86,4 +87,15 @@ public class AutoController {
     autoServicio.restarStock(id, cantidad);
     }
 */
+    @GetMapping("/{id}")
+@ResponseBody
+@CrossOrigin(origins = "http://localhost:8080")
+public ResponseEntity<Auto> obtenerAutoPorId(@PathVariable("id") Long id) {
+    Auto auto = autoServicio.obtenerPorId(id);
+    if (auto != null) {
+        return ResponseEntity.ok(auto);
+    } else {
+        return ResponseEntity.notFound().build();
+    }
+}
 }
