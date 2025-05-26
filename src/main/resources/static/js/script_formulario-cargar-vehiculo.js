@@ -61,12 +61,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Función para vista previa de imagen
     window.preview_de_imagen = function () {
-        const extensionesValidas = /(\.jpg|\.jpeg|\.png)$/i;
+        const extensionesValidas = /(\.jpg|\.jpeg|\.png|\.webp)$/i;
         const f_imagen = document.getElementById("F1_imagen");
         const preview = document.getElementById("F1_imagen_preview");
 
         if (!f_imagen || !extensionesValidas.exec(f_imagen.value)) {
-            alert("El formato de la imagen debe ser .jpg, .jpeg o .png");
+            alert("El formato de la imagen debe ser .jpg, .jpeg, .png o .webp");
             preview.src = "images/imagen-placeholder-para-autos.jpg";
             f_imagen.value = "";
             imagen_valida = false;
@@ -77,10 +77,11 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     // Enviar datos
-    document.getElementById("F1_boton_submit").addEventListener("click", function () {
+    document.getElementById("F1_boton_submit").addEventListener("click", function (event) {
 
+        event.preventDefault();
         if (!imagen_valida) {
-            alert("La imagen debe ser .jpg, .jpeg o .png");
+            alert("La imagen debe ser .jpg, .jpeg, .png o .webp");
             return;
         }
 
@@ -109,17 +110,15 @@ document.addEventListener("DOMContentLoaded", function () {
         formData.append('serie', document.getElementById('F1_serie').value);
         formData.append('cantPuertas', modeloSeleccionado.cantPuertas); // <--- clave
         formData.append('estado', "DISPONIBLE");
-        formData.append('motor',document.getElementById('v_c_motor').value);
-        formData.append('carroceria',document.getElementById('v_c_carroceria').value);
-        formData.append('transmision',document.getElementById('v_c_transmision').value);
-        formData.append('cantpuertas',document.getElementById('v_c_puertas').value);
+        formData.append('motor', modeloSeleccionado.motor);
+        formData.append('carroceria', modeloSeleccionado.carroceria);
+        formData.append('transmision', modeloSeleccionado.transmision);
+        formData.append('cantpuertas', modeloSeleccionado.cantPuertas);
         
-
         
         if (imagenFile) {
             formData.append('imagen', imagenFile);
         }
-
 
 
         fetch('http://localhost:8080/autos/crear', {

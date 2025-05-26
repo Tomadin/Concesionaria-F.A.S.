@@ -1,4 +1,5 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function (event) {
+    event.preventDefault();
     const select_modelo = document.getElementById("F5_select_modelo");
     const select_color = document.getElementById("F5_select_color");
     const formulario = document.getElementById("formulario_venta");
@@ -100,7 +101,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 const data = {
                     dni_cliente: dniCliente,
-                    dni_empleado: parseInt(document.getElementById('F5_dni_empleado').value, 10),
+                    dni_empleado: parseInt(document.getElementById('F5_dni_vendedor').value, 10),
                     metodo_pago: document.getElementById('F5_select_metodo_pago').value,
                     vehiculos: listaVehiculos,
                     observaciones: document.getElementById('F5_observaciones').value

@@ -4,7 +4,7 @@ package Fundamentos.de.Analisis.de.Sistemas.modelos;
 
 
 import jakarta.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 public class Cliente {
@@ -21,13 +21,13 @@ public class Cliente {
     private String correoElectronico;
     
     @Temporal(TemporalType.DATE)
-    private Date fechaNacimiento;
+    private LocalDate fechaNacimiento;
     
     public Cliente() {
     }
 
 
-    public Cliente(int DNI, String nombre, String Apellido, String  Telefono, String calle, String  NumeroCalle, String CorreoElectronico, Date FechaNacimiento) {
+    public Cliente(int DNI, String nombre, String Apellido, String  Telefono, String calle, String  NumeroCalle, String CorreoElectronico, LocalDate FechaNacimiento) {
         this.dni = DNI;
         this.nombre = nombre;
         this.apellido = Apellido;
@@ -105,11 +105,11 @@ public class Cliente {
         this.correoElectronico = CorreoElectronico;
     }
 
-    public Date getFechaNacimiento() {
+    public LocalDate getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(Date FechaNacimiento) {
+    public void setFechaNacimiento(LocalDate FechaNacimiento) {
         this.fechaNacimiento = FechaNacimiento;
     }
     
