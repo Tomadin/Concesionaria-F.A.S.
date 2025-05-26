@@ -69,16 +69,21 @@
 
         <div>
           <label>Ordenar por:</label>
-          <select id="ventas_select_criterio" class="form-select Select_orden" onchange="ordenar_ventas()" style="width: 200px; margin-right: 10px;">
+          <select id="ventas_select_criterio" class="form-select Select_orden" onchange="ordenar_ventas()" style="width: 240px; margin-right: 10px;">
             <option value="id">ID</option>
             <option value="fecha" selected>Fecha</option>
             <option value="total">Total</option>
+            <option value="dni_cliente">DNI Cliente</option>
+            <option value="dni_empleado">DNI Empleado</option>
+            <option value="metodo_pago">Metodo de pago</option>
+            <option value="cantidad_de_detalles">Cantidad de detalles</option>
+            <option value="longitud_observaciones">Longitud de observaciones</option>
           </select>
         </div>
 
         <div>
           <label>Orden:</label>
-          <select id="ventas_select_orden" class="form-select Select_orden" onchange="ordenar_ventas()" style="width: 200px; margin-left: 10px;">
+          <select id="ventas_select_orden" class="form-select Select_orden" onchange="ordenar_ventas()" style="width: 240px; margin-left: 10px;">
             <option value="ascendente">Ascendente</option>
             <option value="descendente" selected>Descendente</option>
           </select>
@@ -86,35 +91,24 @@
       </div>
 
 
-      <table class="Tabla_registro">
-        <tbody id="tabla_registro">
-          <tr id="fila_encabezado_registro">
-            <th>ID Venta</th>
+      <table class="Tabla_registro" >
+        <tbody id="tabla_registro" >
+          <tr id="fila_encabezado_registro" class="Celdas_tablas_registro">
+            
             <th>Fecha</th>
-            <th>ID vehículo</th>
+            <th>ID Venta</th>
+            <th>ID Vehículo</th>
             <th>Modelo</th>
             <th>Cantidad</th>
-            <th>Precio unitario</th>
+            <th>Precio Unitario</th>
+            <th>Versión</th>
+            <th>Color</th>
             <th>Subtotal</th>
             <th>Total</th>
-          </tr>
-
-          <tr>
-            <td rowspan="2">1</td>
-            <td rowspan="2"></td>
-            <td>2</td>
-            <td>3</td>
-            <td>4</td>
-            <td>5</td>
-            <td rowspan="2"></td>
-            <td rowspan="2"></td>
-          </tr>
-
-          <tr class="Fila_venta"> <!--Clase para hacer el borde de abajo mas grueso una vez que se terminan los detales de una fila y por ende se pasa a la siguiente fila con un id de venta distinto-->
-            <td>2</td>
-            <td>3</td>
-            <td>4</td>
-            <td>5</td>
+            <th>DNI Cliente</th>
+            <th>DNI Empleado</th>
+            <th>Método de Pago</th>
+            <th>Observaciones</th>
           </tr>
 
         </tbody>
@@ -128,7 +122,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
   
   <script src="js/script_registro-ventas.js"></script>
-
+  <script src="js/funcion_buscar.js"></script>
 </body>
 
 

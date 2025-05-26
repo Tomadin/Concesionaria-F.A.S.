@@ -91,10 +91,6 @@ body{
     
 }
 
-.Select_orden{
-    width: 100%;
-}
-
 .Select_orden, .Boton {
     padding: 10px;
     border: none;
@@ -227,12 +223,28 @@ th:last-child {
   margin-bottom: 16px;
 }
 
-.Celda_venta{
+.Celda_venta{ /* celdas que no corresponden a los detalles*/
     vertical-align: top;
     font-weight: bold;
     background-color: #d0d0d0;
 }
 
+#tabla_registro td,
+#tabla_registro th {
+    font-size: 0.85rem;
+}
+
+
 .Ultima_fila_venta{
     border-bottom: #444444 solid 2px;
 }
+
+.observaciones {
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.observaciones:hover {
+    cursor: help;
+}
+
