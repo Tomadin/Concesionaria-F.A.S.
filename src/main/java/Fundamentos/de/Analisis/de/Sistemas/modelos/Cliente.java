@@ -15,7 +15,7 @@ public class Cliente {
     private String nombre;
     private String apellido;
     private String  telefono;
-    private int dni;
+    private Integer dni;
     private String calle;
     private String  numeroCalle;
     private String correoElectronico;

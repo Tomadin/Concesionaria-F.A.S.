@@ -3,7 +3,7 @@ document.getElementById('formulario_cliente').addEventListener('submit', functio
 
 
     const data = {
-        DNI: document.getElementById('F3_dni').value,
+        dni: parseInt(document.getElementById('F3_dni').value),
         nombre: document.getElementById('F3_nombre').value,
         apellido: document.getElementById('F3_apellido').value,
         correoElectronico: document.getElementById('F3_correo').value,
