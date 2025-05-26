@@ -134,6 +134,34 @@
   <script src="js/script_vista_principal.js"></script>
   <script src="js/script_formulario-cargar-vehiculo.js"></script>
 </body>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const selectAuto = document.getElementById("autoSelect"); // ID del <select>
+    
+    if (selectAuto) {
+      selectAuto.addEventListener("change", async function () {
+        const autoId = this.value;
+        if (!autoId) return;
+
+        try {
+          const response = await fetch(`http://localhost:8080/autos/${autoId}`);
+          if (!response.ok) throw new Error("Error al obtener auto");
+
+          const auto = await response.json();
+
+          // Rellenar campos con los datos del auto
+          document.getElementById("version").value = auto.version;
+          document.getElementById("color").value = auto.color;
+          document.getElementById("anio").value = auto.anioFabricacion;
+          document.getElementById("serie").value = auto.serie;
+          document.getElementById("motor").value = auto.modelo?.motor || ""; // Asegúrate de tener motor en Modelo
+        } catch (error) {
+          console.error("Error al cargar auto:", error);
+        }
+      });
+    }
+  });
+</script>
 
 
 </html>
