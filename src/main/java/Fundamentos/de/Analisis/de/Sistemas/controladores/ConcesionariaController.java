@@ -39,4 +39,10 @@ public class ConcesionariaController {
     public String cargarNuevaVenta(){
         return "formulario-cargar-venta.html";
     }
+
+    @GetMapping("/registro")
+    public String registroVentas(){
+        return "registro-ventas.html";
+    }
+
 }
