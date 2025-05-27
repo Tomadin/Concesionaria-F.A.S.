@@ -5,27 +5,44 @@ var venta_detalles = {}; // diccionario con clave de id_venta y como valor un ar
 async function cargarRegistro() {
     filas_ventas = [];
     venta_detalles = {};
-    debug_llenar_filas(); // SE DEBE COMENTAR ESTA LÍNEA UNA VEZ LISTA LA CONEXIÓN DEBAJO
 
-    /*
     try {
-        const response = await fetch("http://localhost:8080/ventas/listar"); // 
+        const response = await fetch("http://localhost:8080/api/venta/listar");
         if (!response.ok) throw new Error("Error al cargar ventas");
 
         const ventas = await response.json();
 
         ventas.forEach(venta => {
-            const { id, fecha, subtotal, total, detalles } = venta;
-            crear_fila(id, fecha, subtotal, total);
 
-            detalles.forEach(det => {
-                crear_detalle(id, det.idVehiculo, det.modelo, det.cantidad, det.precioUnitario, det.version, det.color);
+            let cantidad_autos = 0;
+            let precio_subtotal = 0;
+            venta.vehiculos.forEach(auto => {
+                cantidad_autos ++;
+
+                const floatPrecio = parseFloat(auto.precio);
+                precio_subtotal += floatPrecio;
+            });
+            const precio_total = precio_subtotal * 1.21;
+
+            crear_fila(
+                venta.id, 
+                venta.fecha, 
+                precio_subtotal.toFixed(2), 
+                precio_total.toFixed(2), 
+                venta.dni_cliente,
+                venta.dni_empleado,
+                venta.metodo_pago,
+                venta.observaciones
+            );
+
+            venta.vehiculos.forEach(auto => {
+                crear_detalle(venta.id, auto.id, auto.modelo.nombre, cantidad_autos, auto.precio, auto.version, auto.color);
             });
         });
 
     } catch (error) {
         console.error("Hubo un error al obtener las ventas:", error);
-    }*/
+    }
     ordenar_ventas("fecha", "descendente"); 
 }
 
@@ -152,47 +169,6 @@ function ordenar_ventas(forzar_criterio, forzar_orden) {
     } else {
         filas_ventas.sort(comparar);
     }
-
-    renderizar_filas();
-}
-
-function debug_llenar_filas() {
-    filas_ventas = [];
-    venta_detalles = {};
-
-    crear_fila(1, "2025-05-10", 5000000, 6000000, "30123456", "40234567", "Efectivo", "Cliente frecuente.");
-    crear_detalle(1, 101, "Kangoo", 2, 2500000, "Zen", "Blanco");
-    crear_detalle(1, 102, "Logan", 1, 1000000, "Life", "Gris");
-
-    crear_fila(2, "2025-05-11", 7000000, 8000000, "31234567", "40112233", "Tarjeta", "Compró luego de test drive.");
-    crear_detalle(2, 103, "Duster", 1, 7000000, "Intens", "Negro");
-
-    crear_fila(3, "2025-05-12", 8500000, 10000000, "32223344", "40998877", "Transferencia", "Solicitó pintura especial.");
-    crear_detalle(3, 104, "Sandero", 1, 2500000, "Zen", "Rojo");
-    crear_detalle(3, 105, "Duster", 1, 6000000, "Iconic", "Azul");
-    crear_detalle(3, 106, "Logan", 1, 1500000, "Intens", "Gris");
-
-    crear_fila(4, "2025-05-13", 9000000, 9000000, "30111222", "40888888", "Débito", "Cliente nuevo con referencias.");
-    crear_detalle(4, 107, "Alaskan", 1, 9000000, "Outsider", "Negro");
-
-    crear_fila(5, "2025-05-14", 7600000, 7600000, "30999999", "40777777", "Efectivo", "Compra rápida, sin test drive.");
-    crear_detalle(5, 108, "Captur", 1, 7600000, "Intens", "Gris Estrella");
-
-    crear_fila(6, "2025-05-15", 12000000, 13500000, "33444555", "40333333", "Transferencia", "Cliente corporativo. Requiere factura A. Envío programado para dentro de 15 días con entrega en sucursal Godoy Cruz.");
-    crear_detalle(6, 109, "Kangoo", 2, 6000000, "Express", "Blanco");
-    crear_detalle(6, 110, "Oroch", 1, 7500000, "Iconic", "Verde");
-
-    crear_fila(7, "2025-05-16", 5000000, 5000000, "36666777", "40666666", "Crédito", "Primera compra, cliente joven.");
-    crear_detalle(7, 111, "Stepway", 1, 5000000, "Zen", "Naranja");
-
-    crear_fila(8, "2025-05-17", 6500000, 6500000, "35555666", "40555555", "Efectivo", "Cliente habitual. Compra para su hijo.");
-    crear_detalle(8, 112, "Sandero", 1, 6500000, "Intens", "Rojo Fuego");
-
-    crear_fila(9, "2025-05-18", 3000000, 3000000, "34444555", "40444444", "Tarjeta", "Solicita accesorios adicionales.");
-    crear_detalle(9, 113, "Logan", 1, 3000000, "Life", "Negro");
-
-    crear_fila(10, "2025-05-19", 15500000, 17000000, "39999888", "40999999", "Transferencia", "Venta especial para empresa con condiciones pactadas previamente. Incluye servicio postventa y mantenimiento por 12 meses.");
-    crear_detalle(10, 114, "Alaskan", 2, 7750000, "Iconic", "Blanco Glaciar");
 
     renderizar_filas();
 }
