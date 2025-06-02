@@ -40,21 +40,8 @@ async function inicio(){ //funcion llamada por el body del html cada vez que se 
         document.getElementById("input_buscar").value = busqueda;
         filtrar_filas(true);
     }
-
-    //debug, filas de ejemplo
-    /*
-    nueva_fila(1, "Logan", "Life 1.6", "Gris", 24800000, "A1234", 2019, "proveedor1", "Disponible", 5, null, null, null, null, null);
-    nueva_fila(2, "Kangoo", "Zen 1.6", "Rojo", 30000000, "A1634", 2020, "proveedor2", "Vendido", 2, null, null, null, null, null);
-    nueva_fila(3, "Sandero", "Life 1.6", "Azul", 22000000, "A2345", 2021, "proveedor3", "Disponible", 3, null, null, null, null, null);
-    nueva_fila(4, "Kardian", "Evolution", "Blanco", 28000000, "A3456", 2022, "proveedor4", "Almacenado", 4, null, null, null, null, null);
-    nueva_fila(5, "Clio", "Mio 1.2", "Negro", 11000000, "H4567", 1994, "proveedor2", "Disponible", 1, null, null, null, null, null, null, null);
-    nueva_fila(6, "Arkana E-Tech Hybrid", "Espirit Alpine", "Gris", 43900000, "A6789", 2024, "proveedor3", "Vendido", 1, null, null, null, null, null);
-    nueva_fila(7, "Stepway", "Intents 1.6", "Negro", 28740000, "HS7690", 2025, "proveedor4", "Almacenado", 1, null, "1.6 L 4 motor en línea", "Autoportante en acero", "Caja automática CVT", 4);
-    nueva_fila(8, "Stepway", "Intents 1.6 CVT", "Blanco", 28000000, "HS7691", 2025, "proveedor4", "Almacenado", 1, null, null, null, null, null);
-    nueva_fila(9, "Master", "Furgon L1H1", "Blanco", 54080000, "A6797", 2022, "proveedor5", "Disponible", 3, null, null, null, null, null);
-    nueva_fila(10, "Alskan", "Confort 2.3 dCi 160 2WD", "Azul", 36360000, "HS4561", 2023, "proveedor2", "Disponible", 0, null, null, null, null, null);
-    */
-     
+    
+    cargar_resumen_ventas();
 }
 
 var array_filas = []; //array que contiene las filas de la tabla
@@ -417,5 +404,41 @@ function llenar_vista_completa(p_id){
     document.getElementById("v_c_puertas").innerHTML = "Número de puertas : -";
   } else {
     document.getElementById("v_c_puertas").innerHTML = "Número de puertas : " + diccionario_atributos[p_id][14];
+  }
+}
+
+
+async function cargar_resumen_ventas(){
+
+  try {
+    const response = await fetch("http://localhost:8080/api/venta/listar");
+    if (!response.ok) throw new Error("Error al cargar resumen de ventas");
+
+    const ventas = await response.json();
+
+    let resumen_ventas = 0;
+    let resumen_unidades = 0;
+
+    ventas.forEach(venta => {
+
+        let cantidad_autos = 0;
+        let precio_subtotal = 0;
+        venta.vehiculos.forEach(auto => {
+            cantidad_autos ++;
+
+            const floatPrecio = parseFloat(auto.precio);
+            precio_subtotal += floatPrecio;
+        });
+        const precio_total = precio_subtotal * 1.21;
+
+        resumen_ventas += precio_total;
+        resumen_unidades += cantidad_autos;
+    });
+
+    document.getElementById("sumario_unidades").innerHTML = resumen_unidades + " unidades";
+    document.getElementById("sumario_ganancias").innerHTML = "$" + resumen_ventas.toFixed(2);
+
+  } catch (error) {
+    console.error("Hubo un error al obtener el resumen de las ventas:", error);
   }
 }
