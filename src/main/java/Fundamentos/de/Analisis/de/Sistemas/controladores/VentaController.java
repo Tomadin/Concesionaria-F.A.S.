@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,6 +28,7 @@ public class VentaController {
 
     @PostMapping("/crear")
     @ResponseBody
+    @Transactional
     public ResponseEntity<?> crearVenta(@RequestBody Venta venta) {
         try {
             System.out.println("DEBUG: JSON recibido -> " + venta);
@@ -39,8 +41,12 @@ public class VentaController {
             for (Auto auto : vehiculos) {
                 System.out.println("Auto recibido: " + auto);
                 Auto managedAuto = autoServicio.obtenerPorId(auto.getId());
-                managedAuto.setVenta(venta);
-                autoServicio.cambiarEstado(managedAuto);
+                if(!managedAuto.getEstado().equals("VENDIDO")){
+                    managedAuto.setVenta(venta);
+                    autoServicio.cambiarEstado(managedAuto);
+                }else{
+                    throw new IllegalStateException("El vehículo con ID " + auto.getId() + " ya está vendido");
+                }
             }
 
             Venta guardada = ventaServicio.guardar(venta);
