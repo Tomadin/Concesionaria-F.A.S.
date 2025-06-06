@@ -45,15 +45,14 @@ public class VentaController {
                     managedAuto.setVenta(venta);
                     autoServicio.cambiarEstado(managedAuto);
                 }else{
-                    throw new IllegalStateException("El vehículo con ID " + auto.getId() + " ya está vendido");
+                    throw new IllegalStateException("El vehículo con ID " + managedAuto.getId() + " ya está vendido");
                 }
             }
 
             Venta guardada = ventaServicio.guardar(venta);
             return ResponseEntity.ok(guardada);
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IllegalStateException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al cargar la venta");
         }
     }

@@ -6,12 +6,15 @@ package Fundamentos.de.Analisis.de.Sistemas.modelos;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import java.time.LocalDateTime;
 import java.util.List;
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 public class Venta {
@@ -24,6 +27,9 @@ public class Venta {
      @OneToMany(mappedBy = "venta", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties({"venta"})
     private List<Auto> vehiculos;
+    @CreationTimestamp
+    @Column(name = "fecha_venta", updatable = false)
+    private LocalDateTime fecha;
     private String observaciones;
 
     
@@ -38,6 +44,15 @@ public class Venta {
         this.observaciones = observaciones;
     }
 
+    public LocalDateTime getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(LocalDateTime fecha) {
+        this.fecha = fecha;
+    }
+
+    
     public int getId() {
         return id;
     }
