@@ -11,7 +11,7 @@ public class Cliente {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
-    @Basic
+    @Basic // Anotación estándar para columnas básicas (implícita, se puede omitir)
     private String nombre;
     private String apellido;
     private String  telefono;
@@ -20,13 +20,13 @@ public class Cliente {
     private String  numeroCalle;
     private String correoElectronico;
     
-    @Temporal(TemporalType.DATE)
-    private LocalDate fechaNacimiento;
-    
+    @Temporal(TemporalType.DATE) // Indica que el campo se almacena solo con fecha (sin hora
+    private LocalDate fechaNacimiento; // Fecha de nacimiento del client
+    // Constructor vacío requerido por JPA
     public Cliente() {
     }
 
-
+    // Constructor con parámetros para inicializar un objeto Cliente
     public Cliente(int DNI, String nombre, String Apellido, String  Telefono, String calle, String  NumeroCalle, String CorreoElectronico, LocalDate FechaNacimiento) {
         this.dni = DNI;
         this.nombre = nombre;
@@ -37,7 +37,7 @@ public class Cliente {
         this.correoElectronico = CorreoElectronico;
         this.fechaNacimiento = FechaNacimiento;
     }
-
+    // Getters y setters para acceder y modificar los atributos de la clas
     public long getId() {
         return id;
     }

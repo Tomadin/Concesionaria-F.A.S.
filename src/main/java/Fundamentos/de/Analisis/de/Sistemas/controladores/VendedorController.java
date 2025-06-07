@@ -19,7 +19,13 @@ public class VendedorController {
     @Autowired
     private VendedorServicio servicio;
     
-    
+    /*
+     * Ruta para crear un nuevo vendedor
+     * Método: POST /api/vendedores/crear
+     * Recibe: Parámetros individuales desde un formulario (no JSON), como:
+     *   - nombre, apellido, teléfono, correo, fecha de nacimiento
+     * Retorna: el objeto Vendedor creado (en formato JSON)
+     */
     @PostMapping("/crear")
     public Vendedor crearVendedor(
             @RequestParam String nombre,

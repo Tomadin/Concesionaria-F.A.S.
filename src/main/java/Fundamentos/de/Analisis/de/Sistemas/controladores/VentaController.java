@@ -18,12 +18,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/venta")
+@RequestMapping("/api/venta") // Ruta base para todas las operaciones relacionadas con ventas
 public class VentaController {
 
-    @Autowired
+    @Autowired // Inyección del servicio de ventas
     private VentaServicio ventaServicio;
-    @Autowired
+    @Autowired // Inyección del servicio de autos (para actualizar estado de los vehículos vendidos)
     private AutoServicio autoServicio;
 
     @PostMapping("/crear")
@@ -32,31 +32,37 @@ public class VentaController {
     public ResponseEntity<?> crearVenta(@RequestBody Venta venta) {
         try {
             System.out.println("DEBUG: JSON recibido -> " + venta);
-            List<Auto> vehiculos = venta.getVehiculos();
+            List<Auto> vehiculos = venta.getVehiculos(); // Obtener la lista de vehículos asociados a la venta
 
-            if (vehiculos == null || vehiculos.isEmpty()) {
+            if (vehiculos == null || vehiculos.isEmpty()) { // Validación: no se puede registrar una venta sin autos
                 return ResponseEntity.badRequest().body("No se enviaron vehículos");
             }
-
+            // Procesar cada vehículo incluido en la venta
             for (Auto auto : vehiculos) {
                 System.out.println("Auto recibido: " + auto);
-                Auto managedAuto = autoServicio.obtenerPorId(auto.getId());
-                if(!managedAuto.getEstado().equals("VENDIDO")){
-                    managedAuto.setVenta(venta);
-                    autoServicio.cambiarEstado(managedAuto);
-                }else{
+                Auto managedAuto = autoServicio.obtenerPorId(auto.getId()); // Traer el auto desde la base de datos para asegurarse que esté gestionado por el contexto de persistencia
+                if(!managedAuto.getEstado().equals("VENDIDO")){ // Validar que el auto no esté vendid
+                    managedAuto.setVenta(venta);  // Asociar el auto a la venta actual
+                    autoServicio.cambiarEstado(managedAuto); // Cambiar su estado a "VENDIDO"
+                }else{ // Si ya está vendido, lanzar erro
                     throw new IllegalStateException("El vehículo con ID " + managedAuto.getId() + " ya está vendido");
                 }
             }
-
+             // Guardar la venta con todos los autos asociado
             Venta guardada = ventaServicio.guardar(venta);
-            return ResponseEntity.ok(guardada);
+            return ResponseEntity.ok(guardada); // Retornar la venta guardada
 
-        } catch (IllegalStateException e) {
+        } catch (IllegalStateException e) { // Si ocurre algún error, retornar un mensaje genérico
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al cargar la venta");
         }
     }
-
+    
+    /*
+     * Obtener todas las ventas registradas
+     * Ruta: GET /api/venta/listar
+     * Retorna: lista de ventas en JSON
+     */
+    
     @GetMapping("/listar")
     @ResponseBody //Lo convierte en un JSON
     @CrossOrigin(origins = "http://localhost:8080")
