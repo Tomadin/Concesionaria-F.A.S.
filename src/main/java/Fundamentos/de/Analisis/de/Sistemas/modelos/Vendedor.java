@@ -9,7 +9,7 @@ import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import java.util.Date;
 
-@Entity
+@Entity // Esta clase representa a la entidad "Vendedor" que será mapeada a una tabla en la base de datos.
 public class Vendedor {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -23,7 +23,7 @@ public class Vendedor {
 
     public Vendedor() {
     }
-
+    // Constructor con parámetros para inicializar un nuevo objeto Vendedor
     public Vendedor(String nombre, String apellido, int telefono, String correoElectronico, Date fechaNacimiento) {
         this.nombre = nombre;
         this.apellido = apellido;
@@ -31,7 +31,7 @@ public class Vendedor {
         this.correoElectronico = correoElectronico;
         this.fechaNacimiento = fechaNacimiento;
     }
-
+    // Métodos getter y setter para acceder y modificar los atributos privados
     public int getId() {
         return id;
     }
@@ -79,7 +79,7 @@ public class Vendedor {
     public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
-
+    // Representación en texto del objeto Vendedor
     @Override
     public String toString() {
         return "Vendedor{" + "id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", telefono=" + telefono + ", correoElectronico=" + correoElectronico + ", fechaNacimiento=" + fechaNacimiento + '}';

@@ -14,13 +14,13 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class VentaServicio {
 
-    @Autowired
+    @Autowired // Inyección automática del repositorio de ventas para acceder a la base de datos.
     VentaRepository repo;
-    @Autowired
+    @Autowired // Inyección del repositorio de autos, necesario para vincular autos a una venta.
     AutoRepository autoRepo;
     
-    @Transactional
-    public Venta guardar(Venta venta) {
+    @Transactional  // Marca el método como transaccional: todas las operaciones dentro deben completarse correctamente o se revierte todo
+    public Venta guardar(Venta venta) { // Se crea una nueva instancia de Venta para evitar problemas con objetos no gestionados por JPA.
         Venta ve = new Venta();
         ve.setDni_cliente(venta.getDni_cliente());
         ve.setDni_empleado(venta.getDni_empleado());
@@ -30,8 +30,8 @@ public class VentaServicio {
         // Primero guarda la venta sin los autos
         ve = repo.save(ve);
 
-        List<Auto> autosGestionados = new ArrayList<>();
-        if (venta.getVehiculos() != null) {
+        List<Auto> autosGestionados = new ArrayList<>(); // Lista que contendrá los autos gestionados correctamente (relacionados con la venta).
+        if (venta.getVehiculos() != null) { 
             for (Auto auto : venta.getVehiculos()) {
                 Auto managedAuto = autoRepo.findById(auto.getId()).orElseThrow();
                 managedAuto.setVenta(ve); // Establece la relación
@@ -39,19 +39,19 @@ public class VentaServicio {
             }
         }
 
-        ve.setVehiculos(autosGestionados);
+        ve.setVehiculos(autosGestionados); // Asocia la lista de autos a la venta.
         
         return repo.save(ve); // Guarda la venta con la lista actualizada
     }
-
+    // Devuelve una lista con todas las ventas registradas.
     public List<Venta> listarTodos() {
         return repo.findAll();
     }
-
+    // Busca una venta por ID. Devuelve un Optional (puede estar vacía si no existe).
     public Optional<Venta> buscarPorId(int id) {
         return repo.findById(id);
     }
-
+    // Elimina una venta de la base de datos por su ID.
     public void eliminarVenta(int id) {
         repo.deleteById(id);
     }

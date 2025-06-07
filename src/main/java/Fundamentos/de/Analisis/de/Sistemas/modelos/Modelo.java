@@ -8,7 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "modelos")
+@Table(name = "modelos") // Define explícitamente el nombre de la tabla en la base de datos como "modelos"
 public class Modelo {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -22,7 +22,7 @@ public class Modelo {
 
     public Modelo() {
     }
-
+    // Constructor con parámetros para inicializar un objeto Modelo con atributos dados
     public Modelo(String nombre, String version, String carroceria, String motor, String transmision, int cantPuertas) {
         this.nombre = nombre;
         this.version = version;
@@ -31,7 +31,7 @@ public class Modelo {
         this.transmision = transmision;
         this.cantPuertas = cantPuertas;
     }
-
+    // Métodos getters y setters para acceder y modificar cada campo
     public int getId() {
         return id;
     }
@@ -87,7 +87,11 @@ public class Modelo {
     public void setCantPuertas(int cantPuertas) {
         this.cantPuertas = cantPuertas;
     }
-
+    
+    /*
+     * Método toString sobrescrito para representar el objeto Modelo
+     * como una cadena de texto con todos sus atributos principales.
+     */
     @Override
     public String toString() {
         return "Modelo{" + "id=" + id + ", nombre=" + nombre + ", version=" + version + ", carroceria=" + carroceria + ", motor=" + motor + ", transmision=" + transmision + ", cantPuertas=" + cantPuertas + '}';

@@ -21,21 +21,29 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 
-@Controller
-@RequestMapping("/autos")
+@Controller // Indica que esta clase es un controlador web
+@RequestMapping("/autos")   // Todas las rutas definidas aquí comienzan con /autos
 public class AutoController {
     
-    @Autowired
+    @Autowired // Inyecta automáticamente una instancia del servicio de autos
     private AutoServicio autoServicio;
     
-    @GetMapping("/nuevo")
+     /*
+     * Muestra el formulario para cargar un nuevo vehículo
+     * Ruta: GET /autos/nuevo
+     */
+    @GetMapping("/nuevo")  
     public String mostrarFormularioAuto(Model model){
-        model.addAttribute("auto",new Auto());
-        return "formulario-cargar-vehiculo";
+        model.addAttribute("auto",new Auto()); // Se añade un nuevo objeto Auto al modelo para el formulario
+        return "formulario-cargar-vehiculo";  // Devuelve la vista HTML correspondiente
     }
     
 
-    
+    /*
+     * Crea un nuevo auto desde los datos del formulario (API REST)
+     * Ruta: POST /autos/crear
+     * Retorna un JSON con el objeto creado o un error
+     */
     @PostMapping("/crear")
     @ResponseBody
     public ResponseEntity<?> crearAuto(
@@ -61,24 +69,29 @@ public class AutoController {
             auto.setEstado(estado);
             auto.setAnioFabricacion(anio);
             auto.setSerie(serie);
-            if (imagen != null && !imagen.isEmpty()) {
+            
+            if (imagen != null && !imagen.isEmpty()) { // Si se envía una imagen, se convierte en arreglo de bytes
                 auto.setImagen(imagen.getBytes()); 
             }
-
-            autoServicio.guardarAuto(auto);
-            return ResponseEntity.ok(auto); 
+            
+            autoServicio.guardarAuto(auto);// Guarda el auto a través del servicio
+            
+            return ResponseEntity.ok(auto);  // Devuelve el objeto auto como respuesta exitosa
         } catch (IOException e) {
-            e.printStackTrace();
+            e.printStackTrace(); // Devuelve error 500 si falla el procesamiento de la imagen
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al procesar la imagen");
         }
     }
     
-    
+    /*
+     * Lista todos los autos registrados (en formato JSON)
+     * Ruta: GET /autos/listar
+     */
     @GetMapping("/listar")
     @ResponseBody //Lo convierte en un JSON
-    @CrossOrigin(origins = "http://localhost:8080")
+    @CrossOrigin(origins = "http://localhost:8080")  // Permite solicitudes desde el frontend local
     public List<Auto> listarAutos(){
-        return autoServicio.obtenerTodos();
+        return autoServicio.obtenerTodos();   // Devuelve lista de autos desde el servicio
     }
     
     /*
@@ -87,15 +100,22 @@ public class AutoController {
     autoServicio.restarStock(id, cantidad);
     }
 */
+    
+    
+    /*
+     * Devuelve un auto específico por su ID
+     * Ruta: GET /autos/{id}
+     * Retorna JSON o 404 si no se encuentra
+     */
     @GetMapping("/{id}")
 @ResponseBody
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = "http://localhost:8080") 
 public ResponseEntity<Auto> obtenerAutoPorId(@PathVariable("id") Long id) {
-    Auto auto = autoServicio.obtenerPorId(id);
+    Auto auto = autoServicio.obtenerPorId(id); // Busca auto por ID
     if (auto != null) {
-        return ResponseEntity.ok(auto);
+        return ResponseEntity.ok(auto); // Devuelve auto si existe
     } else {
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.notFound().build();  // Retorna 404 si no se encuentra
     }
 }
 }

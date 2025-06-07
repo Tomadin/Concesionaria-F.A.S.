@@ -5,17 +5,17 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.util.Base64;
 
-@Entity
+@Entity // Indica que esta clase es una entidad JPA que se mapeará a una tabla en la base de datos
 public class Auto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id // Marca el atributo 'id' como la clave primaria de la entidad
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // La generación del id es automática y depende de la base de datos (auto-incremental)
     private long id;
     private String estado;
     private String color;
     private int AnioFabricacion;
-    @ManyToOne
-    @JoinColumn(name = "modelo_id")
+    @ManyToOne // Relación muchos a uno con la entidad Modelo (varios autos pueden tener un mismo modelo)
+    @JoinColumn(name = "modelo_id") // Especifica la columna en la tabla Auto que se usará como clave foránea para Modelo
     private Modelo modelo;
     private int Kilometraje;
     private float precio;
@@ -23,18 +23,19 @@ public class Auto {
     private String proveedor;
     private String matricula;
     private String serie;
-    @Lob
-    @Column(name = "imagen", columnDefinition = "LONGBLOB")
-    private byte[] imagen;
+    @Lob // Indica que el campo es un objeto grande (Large Object), en este caso un arreglo de bytes para la imagen
+    @Column(name = "imagen", columnDefinition = "LONGBLOB") // Define que la columna se almacena como LONGBLOB en la base de datos para grandes imágenes
+    private byte[] imagen; // Imagen del auto almacenada en bytes
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "venta_id")
+    @ManyToOne(fetch = FetchType.LAZY) // Relación muchos a uno con la entidad Venta se carga de manera perezosa (Lazy)
+    @JoinColumn(name = "venta_id") // Columna que contiene la referencia a la venta asociada
     @JsonIgnore
     private Venta venta;
-
+    
+    // Constructor vacío requerido por JPA
     public Auto() {
     }
-
+    // Constructor con parámetros para inicializar un Auto con sus atributos
     public Auto(long id, String color, int AnioFabricacion, Modelo modelo, int Kilometraje, float precio, String version, String proveedor, String matricula, String serie, byte[] imagen) {
         this.id = id;
         this.color = color;
@@ -49,7 +50,8 @@ public class Auto {
         this.serie = serie;
         this.imagen = imagen;
     }
-
+    
+    // Getters y setters para acceder y modificar cada propiedad de la clase
     public Venta getVenta() {
         return venta;
     }
@@ -154,14 +156,21 @@ public class Auto {
         this.estado = estado;
     }
 
-    
+    /*
+     * Convierte la imagen almacenada en bytes a una cadena en Base64,
+     * lo que facilita la visualización en páginas web o APIs REST.
+     * @return String con la imagen codificada en Base64 o null si no hay imagen
+     */
     public String getImagenBase64() {
         if (imagen != null && imagen.length > 0) {
             return Base64.getEncoder().encodeToString(imagen);
         }
         return null;
     }
-
+    /*
+     * Método toString sobrescrito para facilitar la impresión del objeto Auto,
+     * mostrando los principales atributos y evitando imprimir la imagen para no saturar la salida.
+     */
     @Override
     public String toString() {
         return "Auto{" + "id=" + id + ", estado=" + estado + ", color=" + color + ", AnioFabricacion=" + AnioFabricacion + ", modelo=" + modelo + ", Kilometraje=" + Kilometraje + ", precio=" + precio + ", version=" + version + ", proveedor=" + proveedor + ", matricula=" + matricula + ", serie=" + serie + ", imagen=" + imagen + ", venta=" + (venta != null ? venta.getId() : "null") +

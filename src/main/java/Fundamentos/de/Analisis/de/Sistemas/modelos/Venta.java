@@ -16,26 +16,27 @@ import java.time.LocalDateTime;
 import java.util.List;
 import org.hibernate.annotations.CreationTimestamp;
 
-@Entity
+@Entity // La clase representa una entidad Venta que se mapea a una tabla en la base de datos.
 public class Venta {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
-    private String dni_cliente;
-    private String dni_empleado;
-    private String metodo_pago;
-     @OneToMany(mappedBy = "venta", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnoreProperties({"venta"})
+    private String dni_cliente; // DNI del cliente que realizó la compra. Se recomienda en el futuro usar una relación con la entidad Cliente.
+    private String dni_empleado; // DNI del empleado (vendedor) que realizó la venta. También podría relacionarse con la entidad Vendedor.
+    private String metodo_pago; // Método de pago utilizado (por ejemplo: efectivo, tarjeta, transferencia)
+     @OneToMany(mappedBy = "venta", cascade = CascadeType.ALL, orphanRemoval = true) // Relación uno-a-muchos entre Venta y Auto: una venta puede incluir múltiples vehículos.
+    @JsonIgnoreProperties({"venta"})  // Ignora la propiedad 'venta' dentro de Auto al serializar a JSON para evitar bucles infinitos.
     private List<Auto> vehiculos;
+    // Marca automáticamente la fecha y hora de creación de la venta.
     @CreationTimestamp
-    @Column(name = "fecha_venta", updatable = false)
+    @Column(name = "fecha_venta", updatable = false) // Este campo no se puede modificar luego de crearse
     private LocalDateTime fecha;
-    private String observaciones;
+    private String observaciones; // Observaciones adicionales o comentarios sobre la vent
 
     
     public Venta() {
     }
-
+    // Constructor con parámetros para inicializar un nuevo objeto Venta
     public Venta(String dni_cliente, String dni_empleado, String metodo_pago, List<Auto> vehiculos, String observaciones) {
         this.dni_cliente = dni_cliente;
         this.dni_empleado = dni_empleado;
@@ -52,7 +53,7 @@ public class Venta {
         this.fecha = fecha;
     }
 
-    
+    // Métodos getter y setter para acceder y modificar los atributos privados
     public int getId() {
         return id;
     }
@@ -101,7 +102,7 @@ public class Venta {
     public void setObservaciones(String observaciones) {
         this.observaciones = observaciones;
     }
-
+    // Representación en texto del objeto Venta
     @Override
     public String toString() {
         return "Venta{" + "id=" + id + ", dni_cliente=" + dni_cliente + ", dni_empleado=" + dni_empleado + ", metodo_pago=" + metodo_pago + ", vehiculos=" + vehiculos + ", observaciones=" + observaciones + '}';
