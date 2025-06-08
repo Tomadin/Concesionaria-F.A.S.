@@ -1,3 +1,23 @@
+/*
+ * Los modelos (o entidades) representan las tablas de la base de datos en forma de clases Java.
+ * Son parte fundamental de JPA (Java Persistence API) y permiten mapear objetos de Java a registros en la base de datos.
+ *
+ * Cada instancia de esta clase equivale a una fila en la tabla correspondiente, y cada atributo es una columna.
+ *
+ * Características principales de una entidad:
+ * - Se anota con @Entity para indicar que es una tabla.
+ * - Usa @Id para definir la clave primaria.
+ * - Se pueden definir relaciones entre entidades (@OneToMany, @ManyToOne, @OneToOne, etc.).
+ * - Permiten incluir lógica auxiliar como métodos `toString()`, `getImagenBase64()` o constructores personalizados.
+ *
+ * En este proyecto, la entidad Auto representa los vehículos en venta y contiene:
+ * - Datos básicos como color, modelo, matrícula, precio, año, etc.
+ * - Una imagen almacenada como arreglo de bytes (LONGBLOB).
+ * - Relaciones con otras entidades como Modelo (modelo del vehículo) y Venta (en caso de estar vendido).
+ *
+ * Estas clases son gestionadas por Hibernate, que se encarga de la persistencia (guardar, actualizar, eliminar, buscar en BD).
+ */
+
 package Fundamentos.de.Analisis.de.Sistemas.modelos;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;

@@ -1,3 +1,22 @@
+/*
+ * Los controladores en Spring Boot se encargan de recibir y gestionar las solicitudes HTTP del usuario,
+ * actuando como intermediarios entre el frontend (la interfaz del usuario) y la lógica del negocio (servicios).
+ *
+ * Su principal función es:
+ * - Interpretar las peticiones HTTP entrantes (GET, POST, PUT, DELETE, etc.).
+ * - Llamar a los métodos correspondientes del servicio (lógica de negocio).
+ * - Preparar y devolver las respuestas apropiadas (HTML, JSON, error, etc.).
+ *
+ * En este proyecto, por ejemplo, el controlador AutoController se encarga de:
+ * - Mostrar formularios para registrar vehículos.
+ * - Recibir datos desde el frontend para crear autos.
+ * - Listar todos los autos registrados.
+ * - Obtener información detallada de un auto específico.
+ * 
+ * También puede manejar archivos (como imágenes) y controlar errores en las operaciones.
+ *
+ * El controlador no debe contener lógica de negocio compleja, sino delegarla al servicio correspondiente.
+ */
 
 package Fundamentos.de.Analisis.de.Sistemas.controladores;
 
