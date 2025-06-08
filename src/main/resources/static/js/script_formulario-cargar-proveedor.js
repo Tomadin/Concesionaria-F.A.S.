@@ -1,7 +1,7 @@
 document.getElementById('formulario_proveedor').addEventListener('submit', function (event) {
     event.preventDefault(); // Evita el envío tradicional
 
-    const data = {
+    const data = { // Objeto con los datos del proveedor
         nombre: document.getElementById('F4_nombre').value,
         apellido: document.getElementById('F4_apellido').value,
         correo: document.getElementById('F4_correo').value,

@@ -1,7 +1,7 @@
 document.getElementById('formulario_cliente').addEventListener('submit', function (event) {
     event.preventDefault(); // Evita el envío tradicional
 
-
+    //guardar los datos del formulario en un objeto
     const data = {
         dni: parseInt(document.getElementById('F3_dni').value),
         nombre: document.getElementById('F3_nombre').value,
@@ -15,7 +15,7 @@ document.getElementById('formulario_cliente').addEventListener('submit', functio
 
     fetch('http://localhost:8080/api/cliente/crear', {
         method: 'POST',
-        headers: {
+        headers: { 
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(data)

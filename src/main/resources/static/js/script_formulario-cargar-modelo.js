@@ -1,7 +1,7 @@
 document.getElementById('formulario_modelo').addEventListener('submit', function (event) {
     event.preventDefault(); // Evita el envío tradicional
 
-    const data = {
+    const data = { // Objeto con los datos del modelo
         nombre: document.getElementById('F2_modelo').value,
         version: document.getElementById('F2_version').value,
         carroceria: document.getElementById('F2_carroceria').value,
